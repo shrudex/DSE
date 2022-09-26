@@ -10,7 +10,7 @@ int main()
     cout << "Enter the substring : ";
     cin.get(str2,30);
     int pos=0, k=0;
-    for (int i=0; str1[i]; i++)
+    for (int i=0; str1[i]!='\0'; i++)
     	if (str1[i]==str2[pos])
     	{
     		pos++;
