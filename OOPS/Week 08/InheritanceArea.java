@@ -1,4 +1,3 @@
-package shrudex;
 import java.util.Scanner;
 class Area {
 	double height;
@@ -31,10 +30,10 @@ class Rectangle extends Area {
 public class AreaInheritance {
 
 	public static void main(String[] args) {
-		Scanner sh = new Scanner (System.in);
+		Scanner in = new Scanner (System.in);
 		double h, b, w;
 		System.out.println("Enter the height : ");
-		String height = sh.nextLine();
+		String height = in.nextLine();
 		try {
 			 h = Double.parseDouble(height); 
 		}
@@ -42,10 +41,10 @@ public class AreaInheritance {
 			System.out.println("Invalid height entered");
 			System.out.println("Height set to zero");
 			 h = 0;
-			 sh.nextLine();
+			 in.nextLine();
 		}
 		System.out.println("Enter the base of the triangle : ");
-		String breadth = sh.nextLine();
+		String breadth = in.nextLine();
 		try {
 			 b = Double.parseDouble(breadth); 
 		}
@@ -53,10 +52,10 @@ public class AreaInheritance {
 			System.out.println("Invalid breadth entered");
 			System.out.println("Breadth set to zero");
 			 b = 0;
-			 sh.nextLine();
+			 in.nextLine();
 		}
 		System.out.println("Enter the width of the rectangle : ");
-		String width = sh.nextLine();
+		String width = in.nextLine();
 		try {
 			 w = Double.parseDouble(width); 
 		}
