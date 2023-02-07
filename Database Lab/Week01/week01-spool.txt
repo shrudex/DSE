@@ -1,0 +1,181 @@
+SQL> create table emp (
+  2      EMPCODE number(3) CONSTRAINT PK_EMPNO PRIMARY KEY,
+  3      NAME varchar(10),
+  4      QUALIFICATION varchar(7) CONSTRAINT VALID_QUALIF CHECK (QUALIFICATION IN ('BTECH', 'MTECH', 'MSC', 'MCA', 'PHD')),
+  5      PHONE number(10),
+  6      EMAIL varchar(20) CONSTRAINT EMAIL_DOMAIN CHECK (EMAIL like '%@digisol.com'),
+  7      DESIGNATION varchar(20) CONSTRAINT VALID_DESIGNATION CHECK (DESIGNATION in ('DEVELOPER', 'PROJECT LEADER', 'PROJECT MANAGER', 'TECHNICAL HEAD', 'PROJECT DIRECTOR', 'PROJECT LEADER', 'CEO')),
+  8      SALARY number(7) CONSTRAINT SALARY_RANGE CHECK (SALARY BETWEEN 97000 and 300000));
+
+Table created.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPCODE                                   NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+ QUALIFICATION                                      VARCHAR2(7)
+ PHONE                                              NUMBER(10)
+ EMAIL                                              VARCHAR2(20)
+ DESIGNATION                                        VARCHAR2(20)
+ SALARY                                             NUMBER(7)
+
+
+SQL> create table skill (
+  2  SKILLID char(3) CONSTRAINT UNQ_SKILLID UNIQUE,
+  3  SKILLNAME varchar(20) CONSTRAINT UNQ_SKILNAME UNIQUE);
+
+Table created.
+
+SQL> desc skill;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SKILLID                                            CHAR(3)
+ SKILLNAME                                          VARCHAR2(20)
+
+SQL> create table emp_skill (
+  2  EMPNO number(3) CONSTRAINT FK_EMPNO references EMP (EMPCODE),
+  3  SKILLID char(3) CONSTRAINT FK_SKILLID references SKILL (SKILLID) ON DELETE CASCADE,
+  4  SKILL_EXPERIENCE number(3) CHECK (SKILL_EXPERIENCE > 0));
+
+Table created.
+
+SQL> desc emp_skill;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(3)
+ SKILLID                                            CHAR(3)
+ SKILL_EXPERIENCE                                   NUMBER(3)
+
+
+SQL> create table client (
+  2  CLIENTID char(3) CONSTRAINT PK_CLIENTID PRIMARY KEY CONSTRAINT STRTSWITH_C CHECK (CLIENTID LIKE 'C%'),
+  3  NAME varchar(10),
+  4  PHONE char(14) CONSTRAINT PHONE_FORMAT CHECK (PHONE like '+91-%' or PHONE like '+81-%' or PHONE like '+31-%' or PHONE like '+48-%' or PHONE like '+44-%'));
+
+Table created.
+
+SQL> desc client;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENTID                                  NOT NULL CHAR(3)
+ NAME                                               VARCHAR2(10)
+ PHONE                                              CHAR(14)
+
+
+
+SQL> create table prj_details (
+  2  PRJID char(3) CONSTRAINT PK_PRJID PRIMARY KEY CHECK (PRJID LIKE 'P%'),
+  3  PRJ_NAME varchar(10),
+  4  START_DATE date,
+  5  END_DATE date,
+  6  ACTUAL_END_DATE date,
+  7  LEAD_BY_EMPCODE number(3) CONSTRAINT FK_LEAD_EMP references EMP (EMPCODE),
+  8  BUDGET_ALLOCATED numeric(10, 1),
+  9  ACTUAL_BUDGET numeric(10,1),
+ 10  CONSTRAINT END_DATE_GARTER_START_DATE CHECK(END_DATE>START_DATE),
+ 11  CONSTRAINT ACTEND CHECK (ACTUAL_END_DATE>=END_DATE)
+ 12  );
+
+Table created.
+
+SQL> desc prj_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRJID                                     NOT NULL CHAR(3)
+ PRJ_NAME                                           VARCHAR2(10)
+ START_DATE                                         DATE
+ END_DATE                                           DATE
+ ACTUAL_END_DATE                                    DATE
+ LEAD_BY_EMPCODE                                    NUMBER(3)
+ BUDGET_ALLOCATED                                   NUMBER(10,1)
+ ACTUAL_BUDGET                                      NUMBER(10,1)
+
+
+
+SQL> create table family_dependents (
+  2  EMPNO number(3) references EMP (EMPCODE),
+  3  DEP_NAME varchar(20),
+  4  RELATIONSHIP varchar(16),
+  5  AGE number(3) CONSTRAINT VALID_AGE CHECK (AGE between 1 and 130),
+  6  PRIMARY KEY (EMPNO, DEP_NAME)
+  7  );
+
+Table created.
+
+SQL> desc family_dependents;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ DEP_NAME                                  NOT NULL VARCHAR2(20)
+ RELATIONSHIP                                       VARCHAR2(16)
+ AGE                                                NUMBER(3)
+
+
+SQL> create table medical_policy (
+  2  EMPNO number(3) CONSTRAINT MEDEMP references EMP (EMPCODE),
+  3  POLICYNO varchar(6) CONSTRAINT MEDPOL check (POLICYNO like 'MED%'),
+  4  PREMIUM number (5) CONSTRAINT MEDPRE check (PREMIUM > 0),
+  5  POLICYDATE date,
+  6  PRIMARY KEY (EMPNO, POLICYNO));
+
+Table created.
+
+SQL> DESC MEDICAL_POLICY;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ POLICYNO                                  NOT NULL VARCHAR2(6)
+ PREMIUM                                            NUMBER(5)
+ POLICYDATE                                         DATE
+
+
+
+SQL> create table pay_check (
+  2  EMPCODE number(3) references EMP(EMPCODE),
+  3  PAY_DATE date,
+  4  REGULAR_INCREMENT number(4) CONSTRAINT VALID_REGU_INCENTIVE check (REGULAR_INCREMENT in (2000, 3000, 5000, 7000, 9000)),
+  5  PERFORMNCE_INCENTIVE number(5),
+  6  DA number(7),
+  7  PF number(6),
+  8  OTHER_INCENTIVES number(4),
+  9  ADVANCE_TAX number(5),
+ 10  PRIMARY KEY (EMPCODE, PAY_DATE));
+
+Table created.
+
+
+SQL> desc pay_check;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPCODE                                   NOT NULL NUMBER(3)
+ PAY_DATE                                  NOT NULL DATE
+ REGULAR_INCREMENT                                  NUMBER(4)
+ PERFORMNCE_INCENTIVE                               NUMBER(5)
+ DA                                                 NUMBER(7)
+ PF                                                 NUMBER(6)
+ OTHER_INCENTIVES                                   NUMBER(4)
+ ADVANCE_TAX                                        NUMBER(5)
+
+
+SQL> create table work_exp (
+  2  EMPCODE number(3) CONSTRAINT EMP_CODEREF references EMP (EMPCODE),
+  3  PRJID char(3) references PRJ_DETAILS (PRJID),
+  4  WORK_EXPERIENCE number(10) CONSTRAINT WORK_EXPE CHECK (WORK_EXPERIENCE >= 0) NOT NULL,
+  5  CLIENTID char(3) references CLIENT (CLIENTID) on delete set NULL,
+  6  RATING char(1) check (RATING IN ('A', 'B', 'C')),
+  7  PRIMARY KEY (EMPCODE, PRJID));
+
+Table created.
+
+SQL> desc work_exp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPCODE                                   NOT NULL NUMBER(3)
+ PRJID                                     NOT NULL CHAR(3)
+ WORK_EXPERIENCE                           NOT NULL NUMBER(10)
+ CLIENTID                                           CHAR(3)
+ RATING                                             CHAR(1)
+
+
+SQL> spool off;
