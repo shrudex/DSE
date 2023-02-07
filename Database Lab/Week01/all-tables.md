@@ -7,26 +7,29 @@ create table emp (
     EMAIL varchar(20) CONSTRAINT EMAIL_DOMAIN CHECK (EMAIL like '%@digisol.com'),
     DESIGNATION varchar(20) CONSTRAINT VALID_DESIGNATION CHECK (DESIGNATION in ('DEVELOPER', 'PROJECT LEADER', 'PROJECT MANAGER', 'TECHNICAL HEAD', 'PROJECT DIRECTOR', 'PROJECT LEADER', 'CEO')),
     SALARY number(7) CONSTRAINT SALARY_RANGE CHECK (SALARY BETWEEN 97000 and 300000));
+```
 
+```
 create table skill (
 	SKILLID char(3) CONSTRAINT UNQ_SKILLID UNIQUE,
 	SKILLNAME varchar(20) CONSTRAINT UNQ_SKILNAME UNIQUE);
+```
 
-
+```
 create table emp_skill (
 	EMPNO number(3) CONSTRAINT FK_EMPNO references EMP (EMPCODE),
 	SKILLID char(3) CONSTRAINT FK_SKILLID references SKILL (SKILLID) ON DELETE CASCADE,
 	SKILL_EXPERIENCE number(3) CHECK (SKILL_EXPERIENCE > 0));
+```
 
-
-
+```
 create table client (
 	CLIENTID char(3) CONSTRAINT PK_CLIENTID PRIMARY KEY CONSTRAINT STRTSWITH_C CHECK (CLIENTID LIKE 'C%'),
 	NAME varchar(10),
 	PHONE char(14) CONSTRAINT PHONE_FORMAT CHECK (PHONE like '+91-%' or PHONE like '+81-%' or PHONE like '+31-%' or PHONE like '+48-%' or PHONE like '+44-%'));
+```
 
-
-
+```
 create table prj_details (
 	PRJID char(3) CONSTRAINT PK_PRJID PRIMARY KEY CHECK (PRJID LIKE 'P%'),
 	PRJ_NAME varchar(10),
@@ -39,8 +42,9 @@ create table prj_details (
 	CONSTRAINT END_DATE_GARTER_START_DATE CHECK(END_DATE>START_DATE),
 	CONSTRAINT ACTEND CHECK (ACTUAL_END_DATE>=END_DATE)
 );
+```
 
-
+```
 create table family_dependents (
 	EMPNO number(3) references EMP (EMPCODE),
 	DEP_NAME varchar(20),
@@ -48,14 +52,18 @@ create table family_dependents (
 	AGE number(3) CONSTRAINT VALID_AGE CHECK (AGE between 1 and 130),
 	PRIMARY KEY (EMPNO, DEP_NAME)
 );
+```
 
+```
 create table medical_policy (
 	EMPNO number(3) CONSTRAINT MEDEMP references EMP (EMPCODE),
 	POLICYNO varchar(6) CONSTRAINT MEDPOL check (POLICYNO like 'MED%'),
 	PREMIUM number (5) CONSTRAINT MEDPRE check (PREMIUM > 0),
 	POLICYDATE date,
 	PRIMARY KEY (EMPNO, POLICYNO));
+```
 
+```
 create table pay_check (
 	EMPCODE number(3) references EMP(EMPCODE),
 	PAY_DATE date,
@@ -66,7 +74,9 @@ create table pay_check (
 	OTHER_INCENTIVES number(4),
 	ADVANCE_TAX number(5),
 	PRIMARY KEY (EMPCODE, PAY_DATE));
+```
 
+```
 create table work_exp (
 	EMPCODE number(3) CONSTRAINT EMP_CODEREF references EMP (EMPCODE),
 	PRJID char(3) references PRJ_DETAILS (PRJID),
