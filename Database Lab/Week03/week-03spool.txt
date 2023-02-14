@@ -1,0 +1,876 @@
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPCODE                                   NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+ QUALIFICATION                                      VARCHAR2(7)
+ PHONE                                              NUMBER(10)
+ EMAIL                                              VARCHAR2(20)
+ DESIGNATION                                        VARCHAR2(20)
+ SALARY                                             NUMBER(7)
+ REPORTS_TO                                         NUMBER(3)
+
+SQL> INSERT into EMP
+  2  Values (100, 'RAJESH', 'BTECH', 1234567889, 'rajesh@digisol.com', 'DEVELOPER', 97001, 101);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (DSE172.FK_REPORTS_TO_EMPCODE) violated - 
+parent key not found 
+
+
+SQL> INSERT into EMP
+  2  Values (106, 'PRSAD', 'PHD', 1234426889, 'prasad@digisol.com', 'CEO', 99001, NULL);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (105, 'MANISH', 'MCA', 1231117889, 'manish@digisol.com', 'DEVELOPER', 147001, 106);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (109, 'SHUBH', 'MBA', 1234437889, 'shrudex@digisol.com', 'CEO', 290000, 105);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.VALID_QUALIF) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (109, 'SHUBH', 'PHD', 1234437889, 'shrudex@digisol.com', 'CEO', 290000, 105);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (110, 'SMITH', 'PHD', 1234949889, 'smith49@digisol.com', 'S. ENGINEER', 99901, 109);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.VALID_DESIGNATION) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (110, 'SMITH', 'PHD', 1234949889, 'smith49@digisol.com', 'CEO', 99901, 109);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (102, 'VIJAY', 'BTECH', 1223567889, 'vijay@digisol.com', 'PROJECT MANAGER', 97011, 110);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (101, 'RAVI', 'MTECH', 1234511889, 'ravi@digisol.com', 'PROJECT LEADER', 97022, 102);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (100, 'RAJESH', 'BTECH', 1234567889, 'rajesh@digisol.com', 'DEVELOPER', 97001, 101);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (108, 'RAKESH', 'MTECH', 6334567889, 'rakkesh@digisol.com', 'DEVELOPER', 98641, 106);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (102, 'RAKESH', 'MTECH', 1232567889, 'rakesh@digisol.com', 'PROJECT LEADER', 99901, 103);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DSE172.PK_EMPNO) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (107, 'RAKESH', 'MTECH', 1232567889, 'rakesh@digisol.com', 'PROJECT LEADER', 99901, 103);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (DSE172.FK_REPORTS_TO_EMPCODE) violated - 
+parent key not found 
+
+
+SQL> INSERT into EMP
+  2  Values (103, 'RAJ', 'MSC', 1234567839, 'raj@digisol.com', 'PROJECT LEADER', 217001, 110);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (107, 'RAKESH', 'MTECH', 1232567889, 'rakesh@digisol.com', 'PROJECT LEADER', 99901, 103);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (108, 'RAKESH', 'MTECH', 6334567889, 'rakkesh@digisol.com', 'DEVELOPER', 98641, 106);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DSE172.PK_EMPNO) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (112, 'RAKESH', 'MTECH', 6334567889, 'rakkesh@digisol.com', 'DEVELOPER', 98641, 106);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DSE172.UNQ_EMAIL) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (112, 'AJAY', 'BTECH', 9234567889, 'ajay@digisol.com', 'TECHNICAL HEAD', 227001, 102);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (110, 'SMITH', 'PHD', 1234949889, 'smith49@digisol.com', 'CEO', 99901, 109);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DSE172.PK_EMPNO) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (149, 'SMITH', 'PHD', 1234949889, 'smith49@digisol.com', 'CEO', 99901, 109);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-00001: unique constraint (DSE172.UNQ_EMAIL) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (113, 'BHASKAR', 'MTECH', 1232327889, 'bhaskar@digisol.com', 'PROJECT DIRECTOR', 94341, 106);
+INSERT into EMP
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.SALARY_RANGE) violated 
+
+
+SQL> INSERT into EMP
+  2  Values (113, 'BHASKAR', 'MTECH', 1232327889, 'bhaskar@digisol.com', 'PROJECT DIRECTOR', 99341, 106);
+
+1 row created.
+
+SQL> INSERT into EMP
+  2  Values (111, 'RAJ', 'BTECH', 1234666389, 'rajjj@digisol.com', 'DEVELOPER', 99021, 110);
+
+1 row created.
+
+SQL> SELECT * from EMP;
+
+   EMPCODE NAME       QUALIFI      PHONE EMAIL                                  
+---------- ---------- ------- ---------- --------------------                   
+DESIGNATION              SALARY REPORTS_TO                                      
+-------------------- ---------- ----------                                      
+       106 PRSAD      PHD     1234426889 prasad@digisol.com                     
+CEO                       99001                                                 
+                                                                                
+       105 MANISH     MCA     1231117889 manish@digisol.com                     
+DEVELOPER                147001        106                                      
+                                                                                
+       109 SHUBH      PHD     1234437889 shrudex@digisol.com                    
+CEO                      290000        105                                      
+                                                                                
+
+   EMPCODE NAME       QUALIFI      PHONE EMAIL                                  
+---------- ---------- ------- ---------- --------------------                   
+DESIGNATION              SALARY REPORTS_TO                                      
+-------------------- ---------- ----------                                      
+       110 SMITH      PHD     1234949889 smith49@digisol.com                    
+CEO                       99901        109                                      
+                                                                                
+       102 VIJAY      BTECH   1223567889 vijay@digisol.com                      
+PROJECT MANAGER           97011        110                                      
+                                                                                
+       101 RAVI       MTECH   1234511889 ravi@digisol.com                       
+PROJECT LEADER            97022        102                                      
+                                                                                
+
+   EMPCODE NAME       QUALIFI      PHONE EMAIL                                  
+---------- ---------- ------- ---------- --------------------                   
+DESIGNATION              SALARY REPORTS_TO                                      
+-------------------- ---------- ----------                                      
+       100 RAJESH     BTECH   1234567889 rajesh@digisol.com                     
+DEVELOPER                 97001        101                                      
+                                                                                
+       108 RAKESH     MTECH   6334567889 rakkesh@digisol.com                    
+DEVELOPER                 98641        106                                      
+                                                                                
+       103 RAJ        MSC     1234567839 raj@digisol.com                        
+PROJECT LEADER           217001        110                                      
+                                                                                
+
+   EMPCODE NAME       QUALIFI      PHONE EMAIL                                  
+---------- ---------- ------- ---------- --------------------                   
+DESIGNATION              SALARY REPORTS_TO                                      
+-------------------- ---------- ----------                                      
+       107 RAKESH     MTECH   1232567889 rakesh@digisol.com                     
+PROJECT LEADER            99901        103                                      
+                                                                                
+       112 AJAY       BTECH   9234567889 ajay@digisol.com                       
+TECHNICAL HEAD           227001        102                                      
+                                                                                
+       113 BHASKAR    MTECH   1232327889 bhaskar@digisol.com                    
+PROJECT DIRECTOR          99341        106                                      
+                                                                                
+
+   EMPCODE NAME       QUALIFI      PHONE EMAIL                                  
+---------- ---------- ------- ---------- --------------------                   
+DESIGNATION              SALARY REPORTS_TO                                      
+-------------------- ---------- ----------                                      
+       111 RAJ        BTECH   1234666389 rajjj@digisol.com                      
+DEVELOPER                 99021        110                                      
+                                                                                
+
+13 rows selected.
+
+SQL> INSERT into SKILL
+  2  values ('S1', 'Full stack');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S2', 'Python');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S3', 'Java');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S4', 'C++');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S6', 'Oracle');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S7', 'Android');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S8', 'AZURE');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S9', 'DOT NET');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into SKILL
+  2  values ('S10', 'IOS');
+
+1 row created.
+
+SQL> SELECT * from skill;
+
+SKI SKILLNAME                                                                   
+--- --------------------                                                        
+S1  Full stack                                                                  
+S2  Python                                                                      
+S3  Java                                                                        
+S4  C++                                                                         
+S6  Oracle                                                                      
+S7  Android                                                                     
+S8  AZURE                                                                       
+S9  DOT NET                                                                     
+S10 IOS                                                                         
+
+9 rows selected.
+
+SQL> INSERT into CLIENT
+  2  values ('C1', 'ABC', '+48-87489389', 'aaa@abc.com');
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C2', 'LTS', '+91-78389397', 'bbb@lts.com');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into CLIENT
+  2  values ('C3', 'RK', '+44-67838934', 'ccc@rk.com');
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C4', 'MMA', '+31-77839093', 'ddd@mma.com');
+
+1 row created.
+
+SQL> 
+SQL> INSERT into CLIENT
+  2  values ('C5', 'AKS', '+81-66822903', 'eee@aks.com');
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C6', 'GKS', '+78-75628982', 'fff@gks.com');
+INSERT into CLIENT
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.PHONE_FORMAT) violated 
+
+
+SQL> INSERT into CLIENT
+  2  values ('C6', 'GKS', '+48-75628982', 'fff@gks.com');
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C7', 'B&B', '+91-64839839', 'ggg@bb.com');
+Enter value for b: 
+old   2: values ('C7', 'B&B', '+91-64839839', 'ggg@bb.com')
+new   2: values ('C7', 'B', '+91-64839839', 'ggg@bb.com')
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C8', 'ABT', '+97-67554667', 'shrudex@gmail.com');
+INSERT into CLIENT
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.PHONE_FORMAT) violated 
+
+
+SQL> 
+SQL> INSERT into CLIENT
+  2  values ('C8', 'ABT', '+31-67554667', 'shrudex@gmail.com');
+
+1 row created.
+
+SQL> INSERT into CLIENT
+  2  values ('C9', 'XYZ', '+44-87114667', 'xyz.ab.com');
+INSERT into CLIENT
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.VALID_EMAIL) violated 
+
+
+SQL> 
+SQL> INSERT into CLIENT
+  2  values ('C9', 'XYZ', '+44-87114667', 'xyz@ab.com');
+
+1 row created.
+
+SQL> SELECT * from CLIENT;
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C1  ABC        +48-87489389                                                     
+aaa@abc.com                                                                     
+                                                                                
+C2  LTS        +91-78389397                                                     
+bbb@lts.com                                                                     
+                                                                                
+C3  RK         +44-67838934                                                     
+ccc@rk.com                                                                      
+                                                                                
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C4  MMA        +31-77839093                                                     
+ddd@mma.com                                                                     
+                                                                                
+C5  AKS        +81-66822903                                                     
+eee@aks.com                                                                     
+                                                                                
+C6  GKS        +48-75628982                                                     
+fff@gks.com                                                                     
+                                                                                
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C7  B          +91-64839839                                                     
+ggg@bb.com                                                                      
+                                                                                
+C8  ABT        +31-67554667                                                     
+shrudex@gmail.com                                                               
+                                                                                
+C9  XYZ        +44-87114667                                                     
+xyz@ab.com                                                                      
+                                                                                
+
+9 rows selected.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', '2020-01-10', '2022-10-11', '2022-10-31', 102, 2000000, 1990000);
+values ('P1', 'SPYDER', '2020-01-10', '2022-10-11', '2022-10-31', 102, 2000000, 1990000)
+                        *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', "2020-01-10", "2022-10-11", "2022-10-31", 102, 2000000, 1990000);
+values ('P1', 'SPYDER', "2020-01-10", "2022-10-11", "2022-10-31", 102, 2000000, 1990000)
+                                                    *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', "10-JAN-20", "11-OCT-11", "21-OCT-11", 102, 2000000, 1990000);
+values ('P1', 'SPYDER', "10-JAN-20", "11-OCT-11", "21-OCT-11", 102, 2000000, 1990000)
+                                                  *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', '10-JAN-20', '11-OCT-11', '21-OCT-11', 102, 2000000, 1990000);
+INSERT into PRJ_DETAILS
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.END_DATE_GARTER_START_DATE) violated 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', '10-JAN-20', '11-OCT-22', '21-OCT-11', 102, 2000000, 1990000);
+INSERT into PRJ_DETAILS
+*
+ERROR at line 1:
+ORA-02290: check constraint (DSE172.ACTEND) violated 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P1', 'SPYDER', '10-JAN-20', '11-OCT-22', '21-OCT-22', 102, 2000000, 1990000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P2', 'APOLLO', '01-JAN-19', '10-JUL-21', '30-DEC-21', 108, 3000000, 3600000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P3', 'UNICORN', '03-NOV-21', '10-OCT-23', '11-OCT-23', 106, 7500000, 8000000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P4', 'ZEUS', '28-FEB-20', '09-JUN-21', '10-JAN-22', 110, 5500000, 5000000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P5', 'JUPITOR', '07-AUG-18', '04-FEB-20', '01-NOV-20', 110, 9000000, 9000000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P6', 'MARS', '21-FEB-22', '07-AUG-22', '30-AUG-22', 110, 3100000, 1830000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values (NULL, 'XXX', '21-OCT-17', '11-DEC-22', '21-DEC-22', 106, 4300300, 3850000);
+values (NULL, 'XXX', '21-OCT-17', '11-DEC-22', '21-DEC-22', 106, 4300300, 3850000)
+        *
+ERROR at line 2:
+ORA-01400: cannot insert NULL into ("DSE172"."PRJ_DETAILS"."PRJID") 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P8', 'XXX', '21-OCT-17', '11-DEC-22', '21-DEC-22', 106, 4300300, 3850000);
+
+1 row created.
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P7', 'BGT', '15-JUN-21', '11-JAN-22', '11-JAN-22', 123, 3330303, 3460000);
+INSERT into PRJ_DETAILS
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (DSE172.FK_LEAD_EMP) violated - parent key not 
+found 
+
+
+SQL> INSERT into PRJ_DETAILS
+  2  values ('P7', 'BGT', '15-JUN-21', '11-JAN-22', '11-JAN-22', 113, 3330303, 3460000);
+
+1 row created.
+
+SQL> SELECT * from PRJ_DETAILS;
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P1  SPYDER     10-JAN-20 11-OCT-22 21-OCT-22             102          2000000   
+      1990000                                                                   
+                                                                                
+P2  APOLLO     01-JAN-19 10-JUL-21 30-DEC-21             108          3000000   
+      3600000                                                                   
+                                                                                
+P3  UNICORN    03-NOV-21 10-OCT-23 11-OCT-23             106          7500000   
+      8000000                                                                   
+                                                                                
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P4  ZEUS       28-FEB-20 09-JUN-21 10-JAN-22             110          5500000   
+      5000000                                                                   
+                                                                                
+P5  JUPITOR    07-AUG-18 04-FEB-20 01-NOV-20             110          9000000   
+      9000000                                                                   
+                                                                                
+P6  MARS       21-FEB-22 07-AUG-22 30-AUG-22             110          3100000   
+      1830000                                                                   
+                                                                                
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P8  XXX        21-OCT-17 11-DEC-22 21-DEC-22             106          4300300   
+      3850000                                                                   
+                                                                                
+P7  BGT        15-JUN-21 11-JAN-22 11-JAN-22             113          3330303   
+      3460000                                                                   
+                                                                                
+
+8 rows selected.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(100,'S1',15);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(100,'S3',10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(101,'S1',6);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(101,'S2',10);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(102,'S4',18);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(110,'S1',14);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(110,'S6',20);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(106,'S2',10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(106,'S6',12);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(106,'S8',10);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(108,'S9',5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(108,'S6',18);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(105,'S7',12);
+
+1 row created.
+
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(105,'S10',11);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO EMP_SKILL
+  2  VALUES(110,'S2',7);
+
+1 row created.
+
+SQL> SELECT * from EMP_SKILL;
+
+     EMPNO SKI SKILL_EXPERIENCE                                                 
+---------- --- ----------------                                                 
+       100 S1                15                                                 
+       100 S3                10                                                 
+       101 S1                 6                                                 
+       101 S2                10                                                 
+       102 S4                18                                                 
+       110 S1                14                                                 
+       110 S6                20                                                 
+       106 S2                10                                                 
+       106 S6                12                                                 
+       106 S8                10                                                 
+       108 S9                 5                                                 
+
+     EMPNO SKI SKILL_EXPERIENCE                                                 
+---------- --- ----------------                                                 
+       108 S6                18                                                 
+       105 S7                12                                                 
+       105 S10               11                                                 
+       110 S2                 7                                                 
+
+15 rows selected.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(100,01-12-2020,2000,NULL,NULL,NULL,2500,5000);
+VALUES(100,01-12-2020,2000,NULL,NULL,NULL,2500,5000)
+                *
+ERROR at line 2:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(100,01-DEC-20,2000,NULL,NULL,NULL,2500,5000);
+VALUES(100,01-DEC-20,2000,NULL,NULL,NULL,2500,5000)
+              *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(100,'01-DEC-20',2000,NULL,NULL,NULL,2500,5000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(101,'01-DEC-20',3000,NULL,NULL,NULL,5000,7000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(102,'01-DEC-20',3000,NULL,NULL,NULL,3600,7000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(100,'01-JAN-21',3000,NULL,NULL,NULL,450,4000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(101,'01-JAN-21',5000,NULL,NULL,NULL,2100,4000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(102,'01-JAN-20',5000,NULL,NULL,NULL,NULL,9000);
+
+1 row created.
+
+SQL> INSERT INTO PAY_CHECK
+  2  VALUES(103,'02-JAN-20',7000,NULL,NULL,NULL,900,3000);
+
+1 row created.
+
+SQL> SELECT * from pay_check;
+
+   EMPCODE PAY_DATE  REGULAR_INCREMENT PERFORMNCE_INCENTIVE         DA          
+---------- --------- ----------------- -------------------- ----------          
+        PF OTHER_INCENTIVES ADVANCE_TAX                                         
+---------- ---------------- -----------                                         
+       100 01-DEC-20              2000                                          
+                       2500        5000                                         
+                                                                                
+       101 01-DEC-20              3000                                          
+                       5000        7000                                         
+                                                                                
+       102 01-DEC-20              3000                                          
+                       3600        7000                                         
+                                                                                
+
+   EMPCODE PAY_DATE  REGULAR_INCREMENT PERFORMNCE_INCENTIVE         DA          
+---------- --------- ----------------- -------------------- ----------          
+        PF OTHER_INCENTIVES ADVANCE_TAX                                         
+---------- ---------------- -----------                                         
+       100 01-JAN-21              3000                                          
+                        450        4000                                         
+                                                                                
+       101 01-JAN-21              5000                                          
+                       2100        4000                                         
+                                                                                
+       102 01-JAN-20              5000                                          
+                                   9000                                         
+                                                                                
+
+   EMPCODE PAY_DATE  REGULAR_INCREMENT PERFORMNCE_INCENTIVE         DA          
+---------- --------- ----------------- -------------------- ----------          
+        PF OTHER_INCENTIVES ADVANCE_TAX                                         
+---------- ---------------- -----------                                         
+       103 02-JAN-20              7000                                          
+                        900        3000                                         
+                                                                                
+
+7 rows selected.
+
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(100,MED001,10000,'10-DEC-2020');
+VALUES(100,MED001,10000,'10-DEC-2020')
+           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(101,MED003,12000,'15-DEC-2020');
+VALUES(101,MED003,12000,'15-DEC-2020')
+           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(100,MED001,10000,'10-JAN-2021');
+VALUES(100,MED001,10000,'10-JAN-2021')
+           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(101,MED003,12000,'15-JAN-2021');
+VALUES(101,MED003,12000,'15-JAN-2021')
+           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(103,MED004,9000,'21-JAN-2021');
+VALUES(103,MED004,9000,'21-JAN-2021')
+           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(100,'MED001',10000,'10-DEC-2020');
+
+1 row created.
+
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(101,'MED003',12000,'15-DEC-2020');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(100,'MED001',10000,'10-JAN-2021');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(101,'MED003',12000,'15-JAN-2021');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO MEDICAL_POLICY
+  2  VALUES(103,'MED004',9000,'21-JAN-2021');
+
+1 row created.
+
+SQL> SELECT * from MEDICAL_POLICY;
+
+     EMPNO POLICY    PREMIUM POLICYDAT                                          
+---------- ------ ---------- ---------                                          
+       100 MED001      10000 10-DEC-20                                          
+       101 MED003      12000 15-DEC-20                                          
+       100 MED001      10000 10-JAN-21                                          
+       101 MED003      12000 15-JAN-21                                          
+       103 MED004       9000 21-JAN-21                                          
+
+SQL> INSERT INTO FAMILY_DEPENDENTS
+  2  VALUES(100,'AJITH','SON',12);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO FAMILY_DEPENDENTS
+  2  VALUES(100,'PRITHVI','DAUGHTER',9);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO FAMILY_DEPENDENTS
+  2  VALUES(101,'AARYA','DAUGHTER',17);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO FAMILY_DEPENDENTS
+  2  VALUES(100,'AKANSHA','SON',11);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO FAMILY_DEPENDENTS
+  2  VALUES(101,'ANITHA','SPOUSE',43);
+
+1 row created.
+
+SQL> SELECT * from FAMILY_DEPENDENTS;
+
+     EMPNO DEP_NAME             RELATIONSHIP            AGE                     
+---------- -------------------- ---------------- ----------                     
+       100 AJITH                SON                      12                     
+       100 PRITHVI              DAUGHTER                  9                     
+       101 AARYA                DAUGHTER                 17                     
+       100 AKANSHA              SON                      11                     
+       101 ANITHA               SPOUSE                   43                     
+
+SQL> spool off
