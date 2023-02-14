@@ -43,6 +43,9 @@ Values (111, 'RAJ', 'BTECH', 1234666389, 'rajjj@digisol.com', 'DEVELOPER', 99021
 _here is a rough file used, can refer to it, just for reference_
 [table-emp-rough work.txt](https://github.com/shrudex/DSE/files/10728667/table-emp-rough.work.txt)
 
+the values given in the question have some _logical errors_ which won't work directly because of the constraints, earlier imposed on the columns. thus, we will have to fix those values and then insert. the order should be followed otherwise the concept of '**referential integrity**' will not be respected.
+
+
 _output of the SELECT query after all the values have been inserted_
 
 ![image](https://user-images.githubusercontent.com/91502997/218637097-75689838-762d-4d7c-9e90-65c604087642.png)
