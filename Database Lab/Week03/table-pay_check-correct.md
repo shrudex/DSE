@@ -1,0 +1,31 @@
+there's no particular order to be followed in this.
+
+```
+INSERT INTO PAY_CHECK 
+VALUES(100,'01-DEC-20',2000,NULL,NULL,NULL,2500,5000);
+
+INSERT INTO PAY_CHECK 
+VALUES(101,'01-DEC-20',3000,NULL,NULL,NULL,5000,7000);
+
+INSERT INTO PAY_CHECK 
+VALUES(102,'01-DEC-20',3000,NULL,NULL,NULL,3600,7000);
+
+INSERT INTO PAY_CHECK 
+VALUES(100,'01-JAN-21',3000,NULL,NULL,NULL,450,4000);
+
+INSERT INTO PAY_CHECK 
+VALUES(101,'01-JAN-21',5000,NULL,NULL,NULL,2100,4000);
+
+INSERT INTO PAY_CHECK 
+VALUES(102,'01-JAN-20',5000,NULL,NULL,NULL,NULL,9000);
+
+INSERT INTO PAY_CHECK 
+VALUES(103,'02-JAN-20',7000,NULL,NULL,NULL,900,3000);
+```
+
+the values throw no errors
+
+_output of the SELECT query after all the values have been inserted_
+
+![image](https://user-images.githubusercontent.com/91502997/218651823-03f21733-eeae-401d-9c9e-9c19862f02d6.png)
+![image](https://user-images.githubusercontent.com/91502997/218651855-3de7da77-2f6a-40d4-aec6-710a3328dc36.png)
