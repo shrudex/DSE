@@ -122,7 +122,7 @@ ORDER BY e.Name ASC, d.Age DESC;
 SELECT e.name, pd.prj_name 
 FROM emp e 
 JOIN work_exp we ON e.empcode = we.empcode 
-JOIN prj_details pd ON we.prj_id = pd.prj_id 
+JOIN prj_details pd ON we.prjid = pd.prjid 
 WHERE e.empcode IN (SELECT we1.empcode 
                     FROM work_exp we1 
                     JOIN emp e1 ON e1.empcode = we1.empcode 
@@ -132,29 +132,46 @@ ORDER BY e.name ASC, pd.prj_name DESC;
 
 **4.20** Find name of employees who have worked in SPYDER or APOLLO (use set Operator)
 ```
-SELECT DISTINCT emp.name 
-FROM emp 
-INNER JOIN project ON emp.empcode = project.empcode 
-WHERE project.name IN ('SPYDER', 'APOLLO');
+SELECT e.name 
+FROM emp e 
+JOIN work_exp w ON e.empcode = w.empcode 
+JOIN prj_details p ON w.prjid = p.prjid 
+WHERE p.prj_name = 'SPYDER'
+
+UNION 
+
+SELECT e.name 
+FROM emp e 
+JOIN work_exp w ON e.empcode = w.empcode 
+JOIN prj_details p ON w.prjid = p.prjid 
+WHERE p.prj_name = 'APOLLO' 
 ```
 
 **4.21** Find the name of employees who are having both skills Oracle & AZURE (use set Operator)
 ```
-SELECT emp.name 
-FROM emp 
-INNER JOIN emp_skill ON emp.empcode = emp_skill.empcode 
-INNER JOIN skill ON emp_skill.skillcode = skill.skillcode 
-WHERE skill.name IN ('Oracle', 'AZURE')
-GROUP BY emp.empcode, emp.name 
-HAVING COUNT(DISTINCT skill.name) = 2;
+SELECT e.name
+FROM emp e
+INNER JOIN EMP_SKILL es ON e.empcode = es.empno
+INNER JOIN skill s ON es.skillid = s.skillid
+WHERE s.skillname = 'Oracle'
+INTERSECT
+SELECT e.name
+FROM emp e
+INNER JOIN EMP_SKILL es ON e.empcode = es.empno
+INNER JOIN skill s ON es.skillid = s.skillid
+WHERE s.skillname = 'Azure';
 
 ```
 
-**4.22** Retrieve the name of employees who do not work in project JUPITOR (use set Operator)
+**4.22** Retrieve the name of employees who do not work in project JUPITOR 
 ```
-SELECT name 
-FROM emp 
-WHERE empcode NOT IN (SELECT DISTINCT empcode FROM project WHERE name = 'JUPITOR');
+SELECT name FROM emp
+WHERE empcode NOT IN (
+  SELECT empcode FROM work_exp
+  WHERE prjid = (
+    SELECT prjid FROM prj_details WHERE prj_name = 'JUPITOR'
+  )
+);
 
 ```
 
@@ -162,8 +179,7 @@ WHERE empcode NOT IN (SELECT DISTINCT empcode FROM project WHERE name = 'JUPITOR
 ```
 SELECT name 
 FROM emp 
-WHERE empcode NOT IN (SELECT DISTINCT reports_to FROM emp WHERE reports_to IS NOT NULL);
-
+WHERE empcode IS NULL;
 ```
 
 **4.24** Display all employee names, email whose name starts with RA.
@@ -174,14 +190,22 @@ WHERE name LIKE 'RA%';
 
 ```
 
-**4.25** Retrieve the name of projects which are started between 01-01-2020 to 41-12-2020.
+**4.25** Retrieve the name of projects which are started between 01-01-2020 to 14-12-2020.
 ```
-SELECT name 
-FROM project 
-WHERE start_date BETWEEN '2020-01-01' AND '2020-12-31';
-
+SELECT prj_name
+FROM prj_details 
+WHERE start_date BETWEEN '01-JAN-20' AND '14-DEC-20';
 ```
 
 **4.26** Display the name of employees who has at least few skills that employee with employee number 101 is having.
 ```
+SELECT e.name
+FROM emp e
+JOIN emp_skill es ON e.empcode = es.empno
+WHERE es.skillid IN (
+  SELECT skillid
+  FROM emp_skill
+  WHERE empno = 101
+)
+GROUP BY e.empcode, e.name;
 ```
