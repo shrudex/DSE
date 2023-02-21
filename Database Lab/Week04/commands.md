@@ -160,7 +160,6 @@ FROM emp e
 INNER JOIN EMP_SKILL es ON e.empcode = es.empno
 INNER JOIN skill s ON es.skillid = s.skillid
 WHERE s.skillname = 'Azure';
-
 ```
 
 **4.22** Retrieve the name of employees who do not work in project JUPITOR 
@@ -172,7 +171,6 @@ WHERE empcode NOT IN (
     SELECT prjid FROM prj_details WHERE prj_name = 'JUPITOR'
   )
 );
-
 ```
 
 **4.23** Display the name of employee who reports to none.
@@ -187,7 +185,6 @@ WHERE empcode IS NULL;
 SELECT name, email 
 FROM emp 
 WHERE name LIKE 'RA%';
-
 ```
 
 **4.25** Retrieve the name of projects which are started between 01-01-2020 to 14-12-2020.
