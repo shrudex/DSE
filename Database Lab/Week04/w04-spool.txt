@@ -1,0 +1,453 @@
+SQL> SELECT * from CLIENT;
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C1  ABC        +48-87489389                                                     
+aaa@abc.com                                                                     
+                                                                                
+C2  LTS        +91-78389397                                                     
+bbb@lts.com                                                                     
+                                                                                
+C3  RK         +44-67838934                                                     
+ccc@rk.com                                                                      
+                                                                                
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C4  MMA        +31-77839093                                                     
+ddd@mma.com                                                                     
+                                                                                
+C5  AKS        +81-66822903                                                     
+eee@aks.com                                                                     
+                                                                                
+C6  GKS        +48-75628982                                                     
+fff@gks.com                                                                     
+                                                                                
+
+CLI NAME       PHONE                                                            
+--- ---------- --------------                                                   
+EMAIL                                                                           
+--------------------------------------------------------------------------------
+C7  B          +91-64839839                                                     
+ggg@bb.com                                                                      
+                                                                                
+C8  ABT        +31-67554667                                                     
+shrudex@gmail.com                                                               
+                                                                                
+C9  XYZ        +44-87114667                                                     
+xyz@ab.com                                                                      
+                                                                                
+
+9 rows selected.
+
+SQL> SELECT Name, Phone, Email FROM Emp
+  2  WHERE Designation = 'DEVELOPER';
+
+NAME            PHONE EMAIL                                                     
+---------- ---------- --------------------                                      
+MANISH     1231117889 manish@digisol.com                                        
+RAJESH     1234567889 rajesh@digisol.com                                        
+RAKESH     6334567889 rakkesh@digisol.com                                       
+RAJ        1234666389 rajjj@digisol.com                                         
+
+
+
+SQL> SELECT NAME from emp WHERE REPORTS_TO = 106;
+
+NAME                                                                            
+----------                                                                      
+MANISH                                                                          
+RAKESH                                                                          
+BHASKAR                                                                         
+
+
+SQL> SELECT Name, Email FROM EMP
+  2  WHERE QUALIFICATION = 'BTECH' AND DESIGNATION = 'TECHNICAL HEAD';
+
+NAME       EMAIL                                                                
+---------- --------------------                                                 
+AJAY       ajay@digisol.com                                                     
+
+
+SQL> SELECT Name FROM Emp WHERE Salary >= 100000 AND Salary <= 200000;
+
+NAME                                                                            
+----------                                                                      
+MANISH                                                                          
+
+SQL> SELECT Name FROM Emp WHERE Salary BETWEEN 100000 AND 200000;
+
+NAME                                                                            
+----------                                                                      
+MANISH                                                                          
+
+
+SQL> SELECT SKILL.SKILLNAME FROM SKILL INNER JOIN EMP_SKILL ON SKILL.SkillID = EMP_SKILL.SkillID
+  2  WHERE EMP_SKILL.EmpNo = 101;
+
+SKILLNAME                                                                       
+--------------------                                                            
+Full stack                                                                      
+Python                                                                          
+
+SQL> SELECT SKILLID from EMP_SKILL
+  2  where EMPNO=101;
+
+SKI                                                                             
+---                                                                             
+S1                                                                              
+S2                                                                              
+
+
+SQL> SELECT EMPCODE FROM WORK_EXP
+  2  WHERE CLIENTID IN ('C1', 'C2')
+  3  AND Rating IN ('A', 'B');
+
+   EMPCODE                                                                      
+----------                                                                      
+       101                                                                      
+       102                                                                      
+       102                                                                      
+       105                                                                      
+
+SQL> SELECT e.Name FROM EMP e
+  2  INNER JOIN WORK_EXP w ON e.EMPCODE = w.EmpCode
+  3  WHERE w.ClientID = 'C2' AND w.Rating = 'B';
+
+NAME                                                                            
+----------                                                                      
+MANISH                                                                          
+VIJAY                                                                           
+
+
+
+SQL> SELECT e.Name, e.Designation, (e.Salary * 12) AS Annual_Salary FROM EMP e;
+
+NAME       DESIGNATION          ANNUAL_SALARY                                   
+---------- -------------------- -------------                                   
+PRSAD      CEO                        1188012                                   
+MANISH     DEVELOPER                  1764012                                   
+XYZ        CEO                        3480000                                   
+SMITH      CEO                        1198812                                   
+VIJAY      PROJECT MANAGER            1164132                                   
+RAVI       PROJECT LEADER             1164264                                   
+RAJESH     DEVELOPER                  1164012                                   
+RAKESH     DEVELOPER                  1183692                                   
+RAJ        PROJECT LEADER             2604012                                   
+RAKESH     PROJECT LEADER             1198812                                   
+AJAY       TECHNICAL HEAD             2724012                                   
+
+NAME       DESIGNATION          ANNUAL_SALARY                                   
+---------- -------------------- -------------                                   
+BHASKAR    PROJECT DIRECTOR           1192092                                   
+RAJ        DEVELOPER                  1188252                                   
+
+13 rows selected.
+
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE REPORTS_TO = (SELECT EMPCODE FROM EMP WHERE NAME = 'RAVI');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> SELECT e.NAME AS Name, m.NAME AS Dependents
+  2  FROM EMP e
+  3  LEFT JOIN EMP m ON e.EMPCODE = m.REPORTS_TO;
+
+NAME       DEPENDENTS                                                           
+---------- ----------                                                           
+RAJESH                                                                          
+RAVI       RAJESH                                                               
+VIJAY      AJAY                                                                 
+VIJAY      RAVI                                                                 
+RAJ        RAKESH                                                               
+MANISH     XYZ                                                                  
+PRSAD      MANISH                                                               
+PRSAD      BHASKAR                                                              
+PRSAD      RAKESH                                                               
+RAKESH                                                                          
+RAKESH                                                                          
+
+NAME       DEPENDENTS                                                           
+---------- ----------                                                           
+XYZ        SMITH                                                                
+SMITH      RAJ                                                                  
+SMITH      VIJAY                                                                
+SMITH      RAJ                                                                  
+RAJ                                                                             
+AJAY                                                                            
+BHASKAR                                                                         
+
+18 rows selected.
+
+
+SQL> SELECT e.Name, e.Salary, p.empcode, p.pay_date, p.regular_increment, p.other_incentives, p.advance_tax
+  2  FROM EMP e INNER JOIN pay_check p ON e.EmpCode = p.EmpCode
+  3  WHERE p.PAY_DATE BETWEEN '01-MAR-21' AND '31-MAR-21';
+
+no rows selected
+
+
+
+SQL> SELECT e.Name AS EmployeeName, m.Name AS HigherAuthorityName, m.Phone FROM EMP e INNER JOIN EMP m ON e.Reports_To = m.EmpCode;
+
+EMPLOYEENA HIGHERAUTH      PHONE                                                
+---------- ---------- ----------                                                
+MANISH     PRSAD      1234426889                                                
+XYZ        MANISH     1231117889                                                
+SMITH      XYZ        1234437889                                                
+VIJAY      SMITH      1234949889                                                
+RAVI       VIJAY      1223567889                                                
+RAJESH     RAVI       1234511889                                                
+RAKESH     PRSAD      1234426889                                                
+RAJ        SMITH      1234949889                                                
+RAKESH     RAJ        1234567839                                                
+AJAY       VIJAY      1223567889                                                
+BHASKAR    PRSAD      1234426889                                                
+
+EMPLOYEENA HIGHERAUTH      PHONE                                                
+---------- ---------- ----------                                                
+RAJ        SMITH      1234949889                                                
+
+12 rows selected.
+
+
+
+SQL> SELECT * FROM PRJ_DETAILS ORDER BY Actual_End_Date DESC;
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P3  UNICORN    03-NOV-21 10-OCT-23 11-OCT-23             106          7500000   
+      8000000                                                                   
+                                                                                
+P8  XXX        21-OCT-17 11-DEC-22 21-DEC-22             106          4300300   
+      3850000                                                                   
+                                                                                
+P1  SPYDER     10-JAN-20 11-OCT-22 21-OCT-22             102          2000000   
+      1990000                                                                   
+                                                                                
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P6  MARS       21-FEB-22 07-AUG-22 30-AUG-22             110          3100000   
+      1830000                                                                   
+                                                                                
+P7  BGT        15-JUN-21 11-JAN-22 11-JAN-22             113          3330303   
+      3460000                                                                   
+                                                                                
+P4  ZEUS       28-FEB-20 09-JUN-21 10-JAN-22             110          5500000   
+      5000000                                                                   
+                                                                                
+
+PRJ PRJ_NAME   START_DAT END_DATE  ACTUAL_EN LEAD_BY_EMPCODE BUDGET_ALLOCATED   
+--- ---------- --------- --------- --------- --------------- ----------------   
+ACTUAL_BUDGET                                                                   
+-------------                                                                   
+P2  APOLLO     01-JAN-19 10-JUL-21 30-DEC-21             108          3000000   
+      3600000                                                                   
+                                                                                
+P5  JUPITOR    07-AUG-18 04-FEB-20 01-NOV-20             110          9000000   
+      9000000                                                                   
+                                                                                
+
+8 rows selected.
+
+
+SQL> SELECT e.Name AS EmployeeName, s.SkillName
+  2  FROM EMP e INNER JOIN EMP_SKILL es ON e.EMPCODE = es.EmpNo
+  3  INNER JOIN Skill s ON es.SkillID = s.SkillID
+  4  ORDER BY e.EMPCODE ASC, es.Skill_Experience DESC;
+
+EMPLOYEENA SKILLNAME                                                            
+---------- --------------------                                                 
+RAJESH     Full stack                                                           
+RAJESH     Java                                                                 
+RAVI       Python                                                               
+RAVI       Full stack                                                           
+VIJAY      C++                                                                  
+MANISH     Android                                                              
+MANISH     IOS                                                                  
+PRSAD      Oracle                                                               
+PRSAD      AZURE                                                                
+PRSAD      Python                                                               
+RAKESH     Oracle                                                               
+
+EMPLOYEENA SKILLNAME                                                            
+---------- --------------------                                                 
+RAKESH     DOT NET                                                              
+SMITH      Oracle                                                               
+SMITH      Full stack                                                           
+SMITH      Python                                                               
+
+15 rows selected.
+
+
+
+SQL> SELECT e.Name AS EmployeeName, d.Dep_Name, d.AGE AS Age
+  2  FROM EMP e INNER JOIN FAMILY_DEPENDENTS d ON e.EMPCODE = d.EMPNO
+  3  WHERE d.Relationship = 'SON'
+  4  ORDER BY e.Name ASC, d.Age DESC;
+
+EMPLOYEENA DEP_NAME                    AGE                                      
+---------- -------------------- ----------                                      
+RAJESH     AJITH                        12                                      
+RAJESH     AKANSHA                      11                                      
+
+
+
+SQL> SELECT e.name, pd.prj_name
+  2  FROM emp e
+  3  JOIN work_exp we ON e.empcode = we.empcode
+  4  JOIN prj_details pd ON we.prjid = pd.prjid
+  5  WHERE e.empcode IN (SELECT we1.empcode
+  6                      FROM work_exp we1
+  7                      JOIN emp e1 ON e1.empcode = we1.empcode
+  8                      WHERE e1.empcode = 101)
+  9  ORDER BY e.name ASC, pd.prj_name DESC;
+
+NAME       PRJ_NAME                                                             
+---------- ----------                                                           
+RAVI       SPYDER                                                               
+
+SQL> SELECT e.name FROM emp e JOIN work_exp w ON e.empcode = w.empcode JOIN prj_details p ON w.prjid = p.prjid WHERE p.prj_name = 'SPYDER' UNION SELECT e.name FROM emp e JOIN work_exp w ON e.empcode = w.empcode JOIN prj_details p ON w.prjid = p.prjid WHERE p.prj_name = 'APOLLO' ORDER BY name;
+
+NAME                                                                            
+----------                                                                      
+MANISH                                                                          
+RAKESH                                                                          
+RAVI                                                                            
+VIJAY                                                                           
+
+SQL> SELECT name FROM emp WHERE empcode NOT IN (SELECT DISTINCT reports_to FROM emp WHERE reports_to IS NOT NULL);
+
+NAME                                                                            
+----------                                                                      
+RAJESH                                                                          
+RAKESH                                                                          
+RAKESH                                                                          
+RAJ                                                                             
+AJAY                                                                            
+BHASKAR                                                                         
+
+6 rows selected.
+
+SQL> SELECT name FROM emp WHERE empcode is null;
+
+no rows selected
+
+SQL> SELECT name, email FROM emp WHERE name LIKE 'RA%';
+
+NAME       EMAIL                                                                
+---------- --------------------                                                 
+RAVI       ravi@digisol.com                                                     
+RAJESH     rajesh@digisol.com                                                   
+RAKESH     rakkesh@digisol.com                                                  
+RAJ        raj@digisol.com                                                      
+RAKESH     rakesh@digisol.com                                                   
+RAJ        rajjj@digisol.com                                                    
+
+6 rows selected.
+
+
+SQL> SELECT prj_name
+  2  FROM prj_details
+  3  WHERE start_date BETWEEN '01-JAN-20' AND '14-DEC-20';
+
+PRJ_NAME                                                                        
+----------                                                                      
+SPYDER                                                                          
+ZEUS                                                                            
+
+SQL> SELECT name FROM emp
+  2  WHERE empcode NOT IN (
+  3    SELECT empcode FROM work_exp
+  4    WHERE prjid = (
+  5      SELECT prjid FROM prj_details WHERE prj_name = 'JUPITOR'
+  6    )
+  7  );
+
+NAME                                                                            
+----------                                                                      
+RAJESH                                                                          
+RAVI                                                                            
+VIJAY                                                                           
+RAJ                                                                             
+PRSAD                                                                           
+RAKESH                                                                          
+RAKESH                                                                          
+XYZ                                                                             
+AJAY                                                                            
+BHASKAR                                                                         
+
+10 rows selected.
+
+
+
+SQL> SELECT e.name
+  2  FROM emp e
+  3  INNER JOIN EMP_SKILL es ON e.empcode = es.empno
+  4  INNER JOIN skill s ON es.skillid = s.skillid
+  5  WHERE s.skillname = 'Oracle'
+  6  INTERSECT
+  7  SELECT e.name
+  8  FROM emp e
+  9  INNER JOIN EMP_SKILL es ON e.empcode = es.empno
+ 10  INNER JOIN skill s ON es.skillid = s.skillid
+ 11  WHERE s.skillname = 'Azure';
+
+no rows selected
+
+
+
+SQL> SELECT name FROM emp
+  2  WHERE empcode NOT IN (
+  3    SELECT empcode FROM work_exp
+  4    WHERE prjid = (
+  5      SELECT prjid FROM prj_details WHERE prj_name = 'JUPITOR'
+  6    )
+  7  );
+
+NAME                                                                            
+----------                                                                      
+RAJESH                                                                          
+RAVI                                                                            
+VIJAY                                                                           
+RAJ                                                                             
+PRSAD                                                                           
+RAKESH                                                                          
+RAKESH                                                                          
+XYZ                                                                             
+AJAY                                                                            
+BHASKAR                                                                         
+
+10 rows selected.
+
+
+SQL> SELECT e.name
+  2  FROM emp e
+  3  JOIN emp_skill es ON e.empcode = es.empno
+  4  WHERE es.skillid IN (
+  5    SELECT skillid
+  6    FROM emp_skill
+  7    WHERE empno = 101
+  8  )
+  9  GROUP BY e.empcode, e.name;
+
+NAME                                                                            
+----------                                                                      
+SMITH                                                                           
+RAVI                                                                            
+RAJESH                                                                          
+PRSAD                                                                           
+
+SQL> spool off
