@@ -53,6 +53,13 @@ SELECT EMPCODE FROM WORK_EXP WHERE PRJID = 'P1')));
 
 5.7 List the employee names who has more work experience in project P1 compared to experience of every employee working in project P2. (set comparison)
 ```
+SELECT e.NAME
+FROM EMP e
+JOIN work_EXP we1 ON e.EMPCODE = we1.EMPCODE
+JOIN work_EXP we2 ON e.EMPCODE = we2.EMPCODE
+WHERE we1.prjid = 'P1'
+GROUP BY e.empcode, e.name
+HAVING MAX(we1.work_experience) > COALESCE(MAX(CASE WHEN we2.prjid = 'P2' THEN we2.work_experience END), 0);
 ```
 
 5.8 List the name of employees who workedin the project and client combinations in which Empcode 100 has worked. (Use set cardinality) 
@@ -77,6 +84,10 @@ SELECT EMPCODE FROM WORK_EXP WHERE PRJID = 'P1')));
 
 5.13 Find Employee name and the number of dependents they are having.
 ```
+SELECT e.NAME, COUNT(d.DEP_NAME) as NUM_DEPENDENTS
+FROM EMP e
+LEFT JOIN FAMILY_DEPENDENTS d ON e.EMPCODE = d.EMPNO
+GROUP BY e.NAME;
 ```
 
 5.14 Retrieve total premium amount collected each year.
