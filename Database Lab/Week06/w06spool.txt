@@ -1,0 +1,474 @@
+SQL> SELECT NAME,
+  2         UPPER(NAME) AS UPPER_NAME,
+  3         LOWER(NAME) AS LOWER_NAME,
+  4         INITCAP(NAME) AS INITCAP_NAME
+  5  FROM EMP;
+
+NAME       UPPER_NAME LOWER_NAME INITCAP_NA                                     
+---------- ---------- ---------- ----------                                     
+PRSAD      PRSAD      prsad      Prsad                                          
+MANISH     MANISH     manish     Manish                                         
+XYZ        XYZ        xyz        Xyz                                            
+SMITH      SMITH      smith      Smith                                          
+VIJAY      VIJAY      vijay      Vijay                                          
+RAVI       RAVI       ravi       Ravi                                           
+RAJESH     RAJESH     rajesh     Rajesh                                         
+RAKESH     RAKESH     rakesh     Rakesh                                         
+RAJ        RAJ        raj        Raj                                            
+RAKESH     RAKESH     rakesh     Rakesh                                         
+AJAY       AJAY       ajay       Ajay                                           
+
+NAME       UPPER_NAME LOWER_NAME INITCAP_NA                                     
+---------- ---------- ---------- ----------                                     
+BHASKAR    BHASKAR    bhaskar    Bhaskar                                        
+RAJ        RAJ        raj        Raj                                            
+
+13 rows selected.
+
+
+
+SQL> SELECT NAME || ' Works as ' || DESIGNATION AS INFO
+  2  FROM EMP;
+
+INFO                                                                            
+----------------------------------------                                        
+PRSAD Works as CEO                                                              
+MANISH Works as DEVELOPER                                                       
+XYZ Works as CEO                                                                
+SMITH Works as CEO                                                              
+VIJAY Works as PROJECT MANAGER                                                  
+RAVI Works as PROJECT LEADER                                                    
+RAJESH Works as DEVELOPER                                                       
+RAKESH Works as DEVELOPER                                                       
+RAJ Works as PROJECT LEADER                                                     
+RAKESH Works as PROJECT LEADER                                                  
+AJAY Works as TECHNICAL HEAD                                                    
+
+INFO                                                                            
+----------------------------------------                                        
+BHASKAR Works as PROJECT DIRECTOR                                               
+RAJ Works as DEVELOPER                                                          
+
+13 rows selected.
+
+SQL> SELECT NAME || ' Works as ' || DESIGNATION
+  2  FROM EMP;
+
+NAME||'WORKSAS'||DESIGNATION                                                    
+----------------------------------------                                        
+PRSAD Works as CEO                                                              
+MANISH Works as DEVELOPER                                                       
+XYZ Works as CEO                                                                
+SMITH Works as CEO                                                              
+VIJAY Works as PROJECT MANAGER                                                  
+RAVI Works as PROJECT LEADER                                                    
+RAJESH Works as DEVELOPER                                                       
+RAKESH Works as DEVELOPER                                                       
+RAJ Works as PROJECT LEADER                                                     
+RAKESH Works as PROJECT LEADER                                                  
+AJAY Works as TECHNICAL HEAD                                                    
+
+NAME||'WORKSAS'||DESIGNATION                                                    
+----------------------------------------                                        
+BHASKAR Works as PROJECT DIRECTOR                                               
+RAJ Works as DEVELOPER                                                          
+
+13 rows selected.
+
+SQL> SELECT LPAD(SALARY, 10, '*')
+  2  FROM EMP;
+
+LPAD(SALARY,10,'*')                                                             
+----------------------------------------                                        
+*****99001                                                                      
+****154351                                                                      
+****290000                                                                      
+*****99901                                                                      
+*****97011                                                                      
+****117396                                                                      
+****101851                                                                      
+****103573                                                                      
+****238701                                                                      
+****109891                                                                      
+****227001                                                                      
+
+LPAD(SALARY,10,'*')                                                             
+----------------------------------------                                        
+*****99341                                                                      
+****103972                                                                      
+
+13 rows selected.
+
+SQL> SELECT RPAD(SALARY, 10, '*')
+  2  FROM EMP;
+
+RPAD(SALARY,10,'*')                                                             
+----------------------------------------                                        
+99001*****                                                                      
+154351****                                                                      
+290000****                                                                      
+99901*****                                                                      
+97011*****                                                                      
+117396****                                                                      
+101851****                                                                      
+103573****                                                                      
+238701****                                                                      
+109891****                                                                      
+227001****                                                                      
+
+RPAD(SALARY,10,'*')                                                             
+----------------------------------------                                        
+99341*****                                                                      
+103972****                                                                      
+
+13 rows selected.
+
+SQL> SELECT NAME, LENGTH(NAME)
+  2  FROM EMP;
+
+NAME       LENGTH(NAME)                                                         
+---------- ------------                                                         
+PRSAD                 5                                                         
+MANISH                6                                                         
+XYZ                   3                                                         
+SMITH                 5                                                         
+VIJAY                 5                                                         
+RAVI                  4                                                         
+RAJESH                6                                                         
+RAKESH                6                                                         
+RAJ                   3                                                         
+RAKESH                6                                                         
+AJAY                  4                                                         
+
+NAME       LENGTH(NAME)                                                         
+---------- ------------                                                         
+BHASKAR               7                                                         
+RAJ                   3                                                         
+
+13 rows selected.
+
+SQL> SELECT NAME, SUBSTR(EMAIL, 3, 7) AS EMAIL_SUBSTR
+  2  FROM EMP;
+
+NAME       EMAIL_SUBSTR                                                         
+---------- ----------------------------                                         
+PRSAD      asad@di                                                              
+MANISH     nish@di                                                              
+XYZ        rudex@d                                                              
+SMITH      ith49@d                                                              
+VIJAY      jay@dig                                                              
+RAVI       vi@digi                                                              
+RAJESH     jesh@di                                                              
+RAKESH     kkesh@d                                                              
+RAJ        j@digis                                                              
+RAKESH     kesh@di                                                              
+AJAY       ay@digi                                                              
+
+NAME       EMAIL_SUBSTR                                                         
+---------- ----------------------------                                         
+BHASKAR    askar@d                                                              
+RAJ        jjj@dig                                                              
+
+13 rows selected.
+
+SQL> SELECT NAME, REPLACE(EMAIL, 'digisol', 'digitech')FROM EMP;
+
+NAME                                                                            
+----------                                                                      
+REPLACE(EMAIL,'DIGISOL','DIGITECH')                                             
+--------------------------------------------------------------------------------
+PRSAD                                                                           
+prasad@digitech.com                                                             
+                                                                                
+MANISH                                                                          
+manish@digitech.com                                                             
+                                                                                
+XYZ                                                                             
+shrudex@digitech.com                                                            
+                                                                                
+
+NAME                                                                            
+----------                                                                      
+REPLACE(EMAIL,'DIGISOL','DIGITECH')                                             
+--------------------------------------------------------------------------------
+SMITH                                                                           
+smith49@digitech.com                                                            
+                                                                                
+VIJAY                                                                           
+vijay@digitech.com                                                              
+                                                                                
+RAVI                                                                            
+ravi@digitech.com                                                               
+                                                                                
+
+NAME                                                                            
+----------                                                                      
+REPLACE(EMAIL,'DIGISOL','DIGITECH')                                             
+--------------------------------------------------------------------------------
+RAJESH                                                                          
+rajesh@digitech.com                                                             
+                                                                                
+RAKESH                                                                          
+rakkesh@digitech.com                                                            
+                                                                                
+RAJ                                                                             
+raj@digitech.com                                                                
+                                                                                
+
+NAME                                                                            
+----------                                                                      
+REPLACE(EMAIL,'DIGISOL','DIGITECH')                                             
+--------------------------------------------------------------------------------
+RAKESH                                                                          
+rakesh@digitech.com                                                             
+                                                                                
+AJAY                                                                            
+ajay@digitech.com                                                               
+                                                                                
+BHASKAR                                                                         
+bhaskar@digitech.com                                                            
+                                                                                
+
+NAME                                                                            
+----------                                                                      
+REPLACE(EMAIL,'DIGISOL','DIGITECH')                                             
+--------------------------------------------------------------------------------
+RAJ                                                                             
+rajjj@digitech.com                                                              
+                                                                                
+
+13 rows selected.
+
+
+SQL> SELECT e.NAME || '-' || d.DEP_NAME
+  2  FROM EMP e
+  3  INNER JOIN FAMILY_DEPENDENTs d
+  4  ON e.empcode = d.EMPNO;
+
+E.NAME||'-'||D.DEP_NAME                                                         
+-------------------------------                                                 
+RAJESH-AJITH                                                                    
+RAJESH-AKANSHA                                                                  
+RAJESH-PRITHVI                                                                  
+RAVI-AARYA                                                                      
+RAVI-ANITHA                                                                     
+
+SQL> SELECT CLIENTID, LENGTH(CLIENTID) AS "Num_Characters"
+  2  FROM CLIENT;
+
+CLI Num_Characters                                                              
+--- --------------                                                              
+C1               3                                                              
+C2               3                                                              
+C3               3                                                              
+C4               3                                                              
+C5               3                                                              
+C6               3                                                              
+C7               3                                                              
+C8               3                                                              
+C9               3                                                              
+
+9 rows selected.
+
+SQL> SELECT RTRIM(CLIENTID) AS "Trimmed_ClientID", LENGTH(RTRIM(CLIENTID))FROM CLIENT;
+
+Tri LENGTH(RTRIM(CLIENTID))                                                     
+--- -----------------------                                                     
+C1                        2                                                     
+C2                        2                                                     
+C3                        2                                                     
+C4                        2                                                     
+C5                        2                                                     
+C6                        2                                                     
+C7                        2                                                     
+C8                        2                                                     
+C9                        2                                                     
+
+9 rows selected.
+
+
+SQL> SELECT LTRIM(CLIENTID) AS "Left_Trimmed_ClientID", LENGTH(LTRIM(CLIENTID))
+  2  FROM CLIENT;
+
+Lef LENGTH(LTRIM(CLIENTID))                                                     
+--- -----------------------                                                     
+C1                        3                                                     
+C2                        3                                                     
+C3                        3                                                     
+C4                        3                                                     
+C5                        3                                                     
+C6                        3                                                     
+C7                        3                                                     
+C8                        3                                                     
+C9                        3                                                     
+
+9 rows selected.
+
+SQL> 
+SQL> SELECT TRIM(CLIENTID) AS "Trimmed_ClientID", LENGTH(TRIM(CLIENTID))
+  2  FROM CLIENT;
+
+Tri LENGTH(TRIM(CLIENTID))                                                      
+--- ----------------------                                                      
+C1                       2                                                      
+C2                       2                                                      
+C3                       2                                                      
+C4                       2                                                      
+C5                       2                                                      
+C6                       2                                                      
+C7                       2                                                      
+C8                       2                                                      
+C9                       2                                                      
+
+9 rows selected.
+
+SQL> SELECT ASCII('A') AS "ASCII_Value", CHR(65) AS "Corresponding_Character"
+  2  FROM DUAL;
+
+ASCII_Value C                                                                   
+----------- -                                                                   
+         65 A                                                                   
+
+SQL> SELECT TRUNC(123.456, 2)FROM DUAL;
+
+TRUNC(123.456,2)                                                                
+----------------                                                                
+          123.45                                                                
+
+SQL> SELECT SQRT(9) AS "Square_Root", POWER(9,2) AS "Square", POWER(9,5) AS "5th_Power"FROM DUAL;
+
+Square_Root     Square  5th_Power                                               
+----------- ---------- ----------                                               
+          3         81      59049                                               
+
+SQL> SELECT ROUND(123.456, 2)FROM DUAL;
+
+ROUND(123.456,2)                                                                
+----------------                                                                
+          123.46                                                                
+
+SQL> SELECT ABS(-123) AS "Absolute_Value", MOD(123,10) AS "Remainder"
+  2  FROM DUAL;
+
+Absolute_Value  Remainder                                                       
+-------------- ----------                                                       
+           123          3                                                       
+
+SQL> SELECT FLOOR(234.36), CEIL(-234.26)FROM DUAL;
+
+FLOOR(234.36) CEIL(-234.26)                                                     
+------------- -------------                                                     
+          234          -234                                                     
+
+SQL> SELECT TO_CHAR(START_DATE, 'DD-Month-YYYY') AS "Start_Date", TO_CHAR(END_DATE, 'DD-Month-YYYY') AS "End_Date"FROM PRJ_DETAILS;
+
+Start_Date                                                                      
+--------------------------------------------                                    
+End_Date                                                                        
+--------------------------------------------                                    
+10-January  -2020                                                               
+11-October  -2022                                                               
+                                                                                
+01-January  -2019                                                               
+10-July     -2021                                                               
+                                                                                
+03-November -2021                                                               
+10-October  -2023                                                               
+                                                                                
+
+Start_Date                                                                      
+--------------------------------------------                                    
+End_Date                                                                        
+--------------------------------------------                                    
+28-February -2020                                                               
+09-June     -2021                                                               
+                                                                                
+07-August   -2018                                                               
+04-February -2020                                                               
+                                                                                
+21-February -2022                                                               
+07-August   -2022                                                               
+                                                                                
+
+Start_Date                                                                      
+--------------------------------------------                                    
+End_Date                                                                        
+--------------------------------------------                                    
+21-October  -2017                                                               
+11-December -2022                                                               
+                                                                                
+15-June     -2021                                                               
+11-January  -2022                                                               
+                                                                                
+
+8 rows selected.
+
+SQL> SELECT TO_CHAR(END_DATE, 'Month-YYYY') AS "Month_Year"FROM PRJ_DETAILS;
+
+Month_Year                                                                      
+-----------------------------------------                                       
+October  -2022                                                                  
+July     -2021                                                                  
+October  -2023                                                                  
+June     -2021                                                                  
+February -2020                                                                  
+August   -2022                                                                  
+December -2022                                                                  
+January  -2022                                                                  
+
+8 rows selected.
+
+SQL> SELECT TO_CHAR(START_DATE, 'Month') AS "Month", TO_CHAR(START_DATE, 'DD') AS "Day", TO_CHAR(START_DATE, 'YYYY') AS "Year"FROM PRJ_DETAILS;
+
+Month                                Da Year                                    
+------------------------------------ -- ----                                    
+January                              10 2020                                    
+January                              01 2019                                    
+November                             03 2021                                    
+February                             28 2020                                    
+August                               07 2018                                    
+February                             21 2022                                    
+October                              21 2017                                    
+June                                 15 2021                                    
+
+8 rows selected.
+
+
+
+SQL> SELECT PRJ_NAME, MONTHS_BETWEEN(END_DATE, START_DATE)FROM PRJ_DETAILS;
+
+PRJ_NAME   MONTHS_BETWEEN(END_DATE,START_DATE)                                  
+---------- -----------------------------------                                  
+SPYDER                              33.0322581                                  
+APOLLO                              30.2903226                                  
+UNICORN                             23.2258065                                  
+ZEUS                                15.3870968                                  
+JUPITOR                             17.9032258                                  
+MARS                                 5.5483871                                  
+XXX                                 61.6774194                                  
+BGT                                 6.87096774                                  
+
+8 rows selected.
+
+SQL> SELECT Prj_Name, End_Date, ADD_MONTHS(end_Date, 2)FROM Prj_Details;
+
+PRJ_NAME   END_DATE  ADD_MONTH                                                  
+---------- --------- ---------                                                  
+SPYDER     11-OCT-22 11-DEC-22                                                  
+APOLLO     10-JUL-21 10-SEP-21                                                  
+UNICORN    10-OCT-23 10-DEC-23                                                  
+ZEUS       09-JUN-21 09-AUG-21                                                  
+JUPITOR    04-FEB-20 04-APR-20                                                  
+MARS       07-AUG-22 07-OCT-22                                                  
+XXX        11-DEC-22 11-FEB-23                                                  
+BGT        11-JAN-22 11-MAR-22                                                  
+
+8 rows selected.
+
+SQL> SELECT NEXT_DAY(SYSDATE, 'THURSDAY')FROM DUAL;
+
+NEXT_DAY(                                                                       
+---------                                                                       
+09-MAR-23                                                                       
+
+SQL> Spool off
