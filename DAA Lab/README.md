@@ -1,0 +1,43 @@
+# Design and Analysis of Algorithms Lab
+This repository contains the programs that were completed as part of the Design and Analysis of Algorithms (DAA) Lab.
+The programs were completed using C++ programming language without using any in-built classes.
+
+## Week-Wise Programs
+### Week 01 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2001)
++ Doubly Linked List 
++ Binary Search Tree
++ Graphs
+
+### Week 02 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2002)
++ GCD using Euclid's Algo
++ Consecutive Integer Checking Method
++ Middle School Method
++ Brute Force Method
+
+### Week 03 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2003)
++ Selection Sort
++ Bubble Sort
++ String Matching
++ Matrix Multiplication
+
+### Week 04 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2004)
++ Knapsack Problem
++ Job Assignment Problem
+
+### Week 05 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2005)
++ BFS Algorithm
++ DFS Algorithm
++ Insertion Sort
+
+### Week 06 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2006)
++ Quick Sort
++ Merge Sort
++ Binary Search
+
+### Week 07 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2007)
++ BST Traversal
++ AVL Tree Height
++ BEST Height
+
+## Conclusion
+These programs were completed as part of the Design and Analysis of Algorithms (DAA) Lab, and they cover a wide range of topics in the field of algorithms. 
