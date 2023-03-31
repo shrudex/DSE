@@ -1,7 +1,7 @@
 # Week 06
 
 ## Write the python code to build the following learning model:
-+ KNN using scikit-learn - [here]([link](https://github.com/shrudex/DSE/blob/main/ML%20Lab/Week%2006/KNN-scikit.ipynb))
++ KNN using scikit-learn - [here](https://github.com/shrudex/DSE/blob/main/ML%20Lab/Week%2006/KNN-scikit.ipynb)
 + KNN from scratch
 + Decision Tree
 
