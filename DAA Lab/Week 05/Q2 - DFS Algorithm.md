@@ -8,15 +8,15 @@ const int MAX_VERTICES = 100;
 int graph[MAX_VERTICES][MAX_VERTICES] = {0};
 bool visited[MAX_VERTICES] = {false};
 
-void dfs(int vertex, int num_vertices)
+void dfs(int vertex, int n)
 {
     visited[vertex] = true;
     cout << vertex << " ";
-    for (int i = 0; i < num_vertices; i++)
+    for (int i = 0; i < n; i++)
     {
         if (graph[vertex][i] == 1 && !visited[i])
         {
-            dfs(i, num_vertices);
+            dfs(i, n);
         }
     }
 }
