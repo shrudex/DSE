@@ -41,3 +41,17 @@ The programs were completed using C++ programming language without using any in-
 
 ## Conclusion
 These programs were completed as part of the Design and Analysis of Algorithms (DAA) Lab, and they cover a wide range of topics in the field of algorithms. 
+
+## Contribution
+Contributions to this repository are welcome! If you would like to contribute, please follow these steps:
+
+1. Fork this repository.
+2. Create a new branch with a descriptive name for your changes.
+3. Make your changes and test them thoroughly.
+4. Commit your changes and push them to your fork.
+5. Submit a pull request explaining your changes and why they should be merged.
+
+Thank you for considering contributing to this repository!
+
+
+
