@@ -39,6 +39,13 @@ The programs were completed using C++ programming language without using any in-
 + AVL Tree Height
 + BEST Height
 
+### Week 08 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2008)
++ Diameter of BT
++ Task Scheduling
++ Check Task Dependency
++ Fibonacci Series
++ Reverse a Queue
+
 ## Conclusion
 These programs were completed as part of the Design and Analysis of Algorithms (DAA) Lab, and they cover a wide range of topics in the field of algorithms. 
 
@@ -52,6 +59,3 @@ Contributions to this repository are welcome! If you would like to contribute, p
 5. Submit a pull request explaining your changes and why they should be merged.
 
 Thank you for considering contributing to this repository!
-
-
-
