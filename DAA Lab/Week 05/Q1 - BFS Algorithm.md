@@ -56,6 +56,6 @@ int main()
     {
         if (!visited[i])    bfs(i, graph, visited, V);
     }
-    return 49;
+    return 49; 
 }
 ```
