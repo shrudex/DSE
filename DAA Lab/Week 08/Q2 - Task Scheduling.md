@@ -92,7 +92,7 @@ int main() {
 }
 ```
 
-**CREDITS - chatGPT**
+### CREDITS - **chatGPT**
 Please note that the code provided was written by ChatGPT and not by me. I want to give full credits to ChatGPT for their work.
 
 ### EXPLANATION
@@ -100,7 +100,8 @@ The program prompts the user to enter the number of modules and teams, and then 
 
 The addEdge function adds an edge between two modules in the adjacency matrix adj. The printSchedule function prints the schedule of tasks to the console. The getNextIndependent function finds the next independent module (i.e., a module with no dependencies) that has not yet been visited.
 
-The generateSchedule function uses a loop to find and add all independent modules to the schedule, and then updates the indegree of all modules that depend on the independent modules. This process is repeated until all modules have been added to the schedule. If at any point an independent module cannot
+The generateSchedule function uses a loop to find and add all independent modules to the schedule, and then updates the indegree of all modules that depend on the independent modules. This process is repeated until all modules have been added to the schedule. If at any point an independent module cannot process (i.e., there are no more independent modules), the function prints an error message.
+
 
 
 ![image](https://user-images.githubusercontent.com/91502997/229891238-f7d5a3d4-46c0-4021-b109-7cbc6558ffa2.png)
