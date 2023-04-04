@@ -42,8 +42,16 @@ int main() {
     insert(root, 1);
 
     int h = height(root);
-    cout << "The height of the binary search tree is: " << treeHeight << endl;
+    cout << "The height of the binary search tree is: " << h << endl;
 
     return 49;
 }
 ```
+
+![image](https://user-images.githubusercontent.com/91502997/229872953-9cf0b0a0-c3e3-4d0f-a9ff-7f7c7025d545.png)
+
+The time complexity of the program is **O(n log n)** on average, but can be **O(n^2)** in the worst case if the tree becomes unbalanced.
+
+
+
+
