@@ -86,3 +86,21 @@ BEGIN
 END;
 /
 ```
+
+**7.5** Write  a  PL/SQL  block  to  accept  an  employee  code  and  project  id  to  find  the  rating  obtained  on  the project. Depending on the rating assign an additional incentive (A-10000, B-5000, C-3000). Display the information in the following format-
++ Employee Number:
++ Employee Name:
++ Salary:
++ Project Name:
++ Rating:
++ Incentive:
++ Total Salary: Salary + (A-10000, B-5000, C-3000)
+
+Update the Other_incentive of employee in Pay_check depending on rating.
+```
+SET SERVEROUTPUT ON
+DECLARE
+  eCode emp.
+```
+
+**7.6** 
