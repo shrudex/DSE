@@ -246,3 +246,74 @@ BEGIN
 END;
 /
 ```
+
+**7.9** Write a PL/SQL block to display- Name of the project leader, Name of the projects handled for which
+budget is managed well within the Budget allocated.
+```
+SET SERVEROUTPUT ON
+DECLARE
+  Leader EMP.NAME%TYPE;
+  Project PRJ_DETAILS.PRJ_NAME%TYPE;
+  Budget PRJ_DETAILS.ACTUAL_BUDGET%TYPE;
+  ABudget PRJ_DETAILS.BUDGET_ALLOCATED%TYPE;
+  CURSOR c IS
+    SELECT e.Name, p.PRJ_NAME, p.ACTUAL_BUDGET, p.BUDGET_ALLOCATED
+    FROM EMP e
+    INNER JOIN PRJ_DETAILS p ON p.LEAD_BY_EMPCODE = e.EMPCODE
+    WHERE p.BUDGET_ALLOCATED >= p.ACTUAL_BUDGET;
+BEGIN
+  OPEN c;
+  FETCH c INTO Leader, Project, Budget, ABudget;
+  WHILE c%FOUND LOOP
+    DBMS_OUTPUT.PUT_LINE('Project Leader: ' || Leader);
+    DBMS_OUTPUT.PUT_LINE('Project Name: ' || Project);
+    FETCH project_cursor INTO Leader, Project, Budget, ABudget;
+  END LOOP;
+  CLOSE c;
+END;
+/
+```
+
+**7.10** Write a PL/SQL block to display the employees name and generate their email id in following format
+and display the same for all employees.
++ Name:
++ Designation:
++ Email Generated: Name.Designation@digisoul.com
+```
+DECLARE
+  Name VARCHAR2(50);
+  Designation VARCHAR2(50);
+  Email VARCHAR2(100);
+  CURSOR c IS 
+    SELECT Name, Designation 
+    FROM EMP;
+BEGIN
+  FOR R IN c LOOP
+    Name := R.Name;
+    Designation := R.Designation;
+    Email := Name || '.' || Designation || '@digisoul.com';
+    DBMS_OUTPUT.PUT_LINE('+ Name: ' || Nane);
+    DBMS_OUTPUT.PUT_LINE('+ Designation: ' || Designation);
+    DBMS_OUTPUT.PUT_LINE('+ Email Generated: ' || Email);
+    EXIT WHEN c % NOTFOUND;
+  END LOOP;
+  CLOSE c;
+END;
+/
+```
+
+**7.11** Write the PL/SQL block for Question 7.8. along with exception handling for
++ Entry of not existing Account number.
++ If Resulting balance is lesser than minimum Balance.
+
+**7.12** Assume that we have a new project Marvel and there is need for human resources with skills- 3 full
+stack developer, 1 Oracle and 1 Azure each having at least 12 months of experience. Pass
+skill_experience as parameter and list all the human resources available in the company satisfying the
+need.
+
+**7.13** Write PL/SQL block with parameterized cursor to display all the employee code, name, designation of
+the employees who are rated with a particular rating by a particular client. Pass rating and client as
+parameter to the cursor. (Use cursor for loop.)
+
+**7.14** Write a PL/SQL block to display name, total work experience of 5 employees who are having highest
+total work experience
