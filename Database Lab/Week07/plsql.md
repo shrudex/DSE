@@ -100,7 +100,95 @@ Update the Other_incentive of employee in Pay_check depending on rating.
 ```
 SET SERVEROUTPUT ON
 DECLARE
-  eCode emp.
+    eCode emp.EMPCODE%TYPE := &eCode;
+    prjId PRJ_DETAILS.PRJID%TYPE := &prjId;
+    empName EMP.NAME%TYPE;
+    s EMP.BASIC_SALARY%TYPE;
+    pName PRJ_DETAILS.PRJ_NAME%TYPE;
+    r VARCHAR2(1);
+    inc PAY_CHECK.REGULAR_INCENTIVE%TYPE;
+    tS NUMBER;
+BEGIN
+    SELECT e.Name, e.BASIC_SALARY, p.PRJ_NAME, ex.RATING
+    INTO empName, s, pName, r
+    FROM prj_details p
+    INNER JOIN experience ex
+    ON p.prjid = ex.prjid
+    INNER JOIN emp e
+    ON ex.EMPNO = e.EMPCODE;
+    WHERE e.EMPCODE = eCode
+    AND p.PRJID = prjId;
+    IF r = 'A' THEN
+        inc := 10000;
+    ELSIF r = 'B' THEN
+        inc := 5000;
+    ELSE
+        inc := 3000;
+    END IF;
+    tS := tS + inc;
+    DBMS_OUTPUT.PUT_LINE('Employee Number: ' || eCode);
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || empName);
+    DBMS_OUTPUT.PUT_LINE('Salary: ' || s);
+    DBMS_OUTPUT.PUT_LINE('Project Name: ' || pName);
+    DBMS_OUTPUT.PUT_LINE('Rating: ' || r);
+    DBMS_OUTPUT.PUT_LINE('Incentive: ' || inc);
+    DBMS_OUTPUT.PUT_LINE('Total Salary: ' || tS);
+    UPDATE PAY_CHECK
+    SET other_incentive = inc
+    WHERE EMPCODE = eCode;
+END;
+/
 ```
 
-**7.6** 
+**7.6** Write a PL/SQL block to calculate Jan-2021 monthly salary of employee and other components of
+salary depending on Salary values in EMP table for the employee number 100. Display the salary
+information of employee 100 in the following format.
++ Name:
++ Basic_Salary: Salary from EMP table
++ Regular Increment: Regular_Increment
++ Increased Basic Salary: Salary+ Regular_Increment
++ Performance incentive: performnce_incentive
++ DA: 50% of Increased Basic Salary.
++ PF: 12% of Increased Basic Salary.
++ Other Incentive: other_incentives
++ Advance tax paid: advance_tax
++ Monthly Gross Salary: Salary+Regular_Increment + Performnce_incentive + DA + PF + other_incentives.
++ Monthly Take home salary: Gross Salary – PF- advance_tax.
+```
+DECLARE
+    Name VARCHAR2(50);
+    s NUMBER;
+    rinc NUMBER;
+    pinc NUMBER;
+    da NUMBER;
+    pf NUMBER;
+    oinc NUMBER := 2000;
+    advTax NUMBER := 1000;
+    gs NUMBER;
+    tHsal NUMBER;
+    iS NUMBER;
+BEGIN
+    SELECT e.NAME, e.BASIC_SALARY, p.REGULAR_INCREMENT, p.PERFORMANCE_INCENTIVE, p.DA, p.PF, p.OTHER_INCENTIVE, p.ADVANCE_TAX INTO
+    INTO Name, s, rinc, pinc, da, pf, oinc, advTax
+    FROM emp
+    INNER JOIN PAY_CHECK p ON e.EMPCODE = p.EMPCODE
+    WHERE e.empcode = 100 AND TO_DATE(p.PAY_DATE, 'MON-YYYY') = 'JAN-2021';
+    iS = s + rinc;
+    da = 0.5*iS;
+    pf = 0.12*iS;
+    gS = s + rinc + pinc + da + pf + oinc;
+    tHsal = gS - pf - advTax;
+    DBMS_OUTPUT.PUT_LINE('Name: ' || Name);
+    DBMS_OUTPUT.PUT_LINE('Basic_Salary: ' || s);
+    DBMS_OUTPUT.PUT_LINE('Regular Increment: ' || rinc);
+    DBMS_OUTPUT.PUT_LINE('Increased Basic Salary: ' || iS);
+    DBMS_OUTPUT.PUT_LINE('Performance Incentive: ' || pinc);
+    DBMS_OUTPUT.PUT_LINE('DA: ' || da);
+    DBMS_OUTPUT.PUT_LINE('PF: ' || pf);
+    DBMS_OUTPUT.PUT_LINE('Other Incentives: ' || oinc);
+    DBMS_OUTPUT.PUT_LINE('Advance Tax Paid: ' || advTax);
+    DBMS_OUTPUT.PUT_LINE('Monthly Gross Salary: ' || gS);
+    DBMS_OUTPUT.PUT_LINE('Monthly Take Home Salary: ' || tHsal);
+END;
+/
+```
