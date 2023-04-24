@@ -162,8 +162,8 @@ DECLARE
     pinc NUMBER;
     da NUMBER;
     pf NUMBER;
-    oinc NUMBER := 2000;
-    advTax NUMBER := 1000;
+    oinc NUMBER;
+    advTax NUMBER;
     gs NUMBER;
     tHsal NUMBER;
     iS NUMBER;
@@ -189,6 +189,60 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Advance Tax Paid: ' || advTax);
     DBMS_OUTPUT.PUT_LINE('Monthly Gross Salary: ' || gS);
     DBMS_OUTPUT.PUT_LINE('Monthly Take Home Salary: ' || tHsal);
+END;
+/
+```
+
+**7.7** 
+```
+SET SERVEROUTPUT ON
+DECLARE
+    Name VARCHAR2(50);
+    s NUMBER;
+    rinc NUMBER;
+    pinc NUMBER;
+    da NUMBER;
+    pf NUMBER;
+    oinc NUMBER;
+    advTax NUMBER;
+    gs NUMBER;
+    tHsal NUMBER;
+    iS NUMBER;
+    CURSOR empCursor IS
+        SELECT EMP.*, p.REGULAR_INCREMENT, p.PERFORMANCE_INCENTIVE, p.DA, p.PF, p.OTHER_INCENTIVE, p.ADVANCE_TAX
+        FROM EMP e
+        INNER JOIN PAY_CHECK p ON e.EMPCODE = p.EMPCODE
+        WHERE TO_DATE(PAY_CHECK.PAY_DATE, 'MON-YYYY') = 'JAN-2021';
+
+BEGIN
+    FOR R IN empCursor LOOP
+        Name := R.NAME;
+        s := R.BASIC_SALARY;
+        rinc := R.REGULAR_INCREMENT;
+        pinc := R.PERFORMANCE_INCENTIVE;
+        da := R.DA;
+        pf := R.PF;
+        oinc := R.OTHER_INCENTIVE;
+        advTax := R.ADVANCE_TAX;
+
+        iS := s + rinc;
+        da := 0.5*iS;
+        pf := 0.12*iS;
+        gS := s + rinc + pinc + da + pf + oinc;
+        tHsal := gS - pf - advTax;
+
+        DBMS_OUTPUT.PUT_LINE('Name: ' || Name);
+        DBMS_OUTPUT.PUT_LINE('Basic_Salary: ' || s);
+        DBMS_OUTPUT.PUT_LINE('Regular Increment: ' || rinc);
+        DBMS_OUTPUT.PUT_LINE('Increased Basic Salary: ' || iS);
+        DBMS_OUTPUT.PUT_LINE('Performance Incentive: ' || pinc);
+        DBMS_OUTPUT.PUT_LINE('DA: ' || da);
+        DBMS_OUTPUT.PUT_LINE('PF: ' || pf);
+        DBMS_OUTPUT.PUT_LINE('Other Incentives: ' || oinc);
+        DBMS_OUTPUT.PUT_LINE('Advance Tax Paid: ' || advTax);
+        DBMS_OUTPUT.PUT_LINE('Monthly Gross Salary: ' || gS);
+        DBMS_OUTPUT.PUT_LINE('Monthly Take Home Salary: ' || tHsal);
+    END LOOP;
 END;
 /
 ```
