@@ -193,7 +193,7 @@ END;
 /
 ```
 
-**7.7** 
+**7.7** Do the salary processing of all employees according to the Question 6. (using cursor)
 ```
 SET SERVEROUTPUT ON
 DECLARE
@@ -305,11 +305,22 @@ END;
 **7.11** Write the PL/SQL block for Question 7.8. along with exception handling for
 + Entry of not existing Account number.
 + If Resulting balance is lesser than minimum Balance.
+```
+SET SERVEROUTPUT ON
+DECLARE
+BEGIN
+END
+```
 
 **7.12** Assume that we have a new project Marvel and there is need for human resources with skills- 3 full
 stack developer, 1 Oracle and 1 Azure each having at least 12 months of experience. Pass
 skill_experience as parameter and list all the human resources available in the company satisfying the
 need.
+```
+SET SERVEROUTPUT ON
+DECLARE
+  
+```
 
 **7.13** Write PL/SQL block with parameterized cursor to display all the employee code, name, designation of
 the employees who are rated with a particular rating by a particular client. Pass rating and client as
@@ -317,3 +328,10 @@ parameter to the cursor. (Use cursor for loop.)
 
 **7.14** Write a PL/SQL block to display name, total work experience of 5 employees who are having highest
 total work experience
+```
+SET SERVEROUTPUT ON
+DECLARE
+  Name EMP.NAME%TYPE;
+  ex WORK_EXP.WORK_
+  
+```
