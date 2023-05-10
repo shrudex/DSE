@@ -11,6 +11,7 @@ int bs(int arr[], int l, int r, int x) {
         else if (arr[mid] > x) return bs(arr, l, mid - 1, x);
         else return bs(arr, mid + 1, r, x);
     return -1;
+    }
 }
 
 int main() {
