@@ -1,4 +1,4 @@
-# ✅Question - 02
+# ✅Question - 01
 ## Write a program to find Minimum Cost Spanning Tree🌲 of a given undirected graph📊 using _Prim’s algorithm_.
 
 ```
