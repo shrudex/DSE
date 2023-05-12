@@ -45,6 +45,25 @@ The programs were completed using C++ programming language without using any in-
 + Check Task Dependency
 + Fibonacci Series
 + Reverse a Queue
++ Heap Sort - BottomUp
++ Heap Sort - TopDown
+
+### Week 09 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2009)
++ Comparison Counting Algorithm
++ Horspool's Algorithm - String Matching
++ Open Hash Table
+
+### Week 10 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2010)
++ Binomial Coefficient
++ Transitive Closure - Warshall's Algorithm
++ All Pairs Shortest Paths - Floyd's Algorithm
++ Knapsack Problem
+
+### Week 11 [🔗](https://github.com/shrudex/DSE/tree/main/DAA%20Lab/Week%2011)
++ Prim's Algorithm - MST
++ Kruskal's Algorithm - MST
++ Dijkstra's Algorithm - Shortest Path
+
 
 ## Conclusion
 These programs were completed as part of the Design and Analysis of Algorithms (DAA) Lab, and they cover a wide range of topics in the field of algorithms. 
