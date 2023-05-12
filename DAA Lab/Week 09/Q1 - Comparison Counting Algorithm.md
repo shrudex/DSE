@@ -5,61 +5,51 @@
 #include <iostream>
 using namespace std;
 
-void countingSort(int arr[], int n, int exp)
-{
-    int output[n]; 
-    int count[10] = {0}; 
-
-    //storing the count of occurrences in count[] array
-    for (int i = 0; i < n; i++)
-        count[(arr[i]/exp)%10]++;
-
-    //changing count[i] so that it contains actual position of this digit in output[]
-    for (int i = 1; i < 10; i++)
-        count[i] += count[i - 1];
-
-    //building the output array
-    for (int i = n - 1; i >= 0; i--)
-    {
-        output[count[(arr[i]/exp)%10] - 1] = arr[i];
-        count[(arr[i]/exp)%10]--;
+void comparisonCountingSort(int arr[], int n) {
+    int max_val = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max_val)
+            max_val = arr[i];
     }
 
-    //copying the output array to arr[], so that arr[] now contains sorted numbers
+    int* count = new int[max_val+1]();
+    
     for (int i = 0; i < n; i++)
-        arr[i] = output[i];
+        count[arr[i]]++;
+
+    for (int i = 1; i <= max_val; i++)
+        count[i] += count[i-1];
+
+    int* sorted_arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        sorted_arr[count[arr[i]]-1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    for (int i = 0; i < n; i++)
+        arr[i] = sorted_arr[i];
 }
 
-void radixSort(int arr[], int n)
-{
-    //finding the maximum number to know the number of digits
-    int m = arr[0];
-    for (int i = 1; i < n; i++)
-        if (arr[i] > m)
-            m = arr[i];
-
-    //counting sort for every digit
-    for (int exp = 1; m/exp > 0; exp *= 10)
-        countingSort(arr, n, exp);
-}
-
-int main()
-{
+int main() {
     int n;
-    cout << "Enter the number of elements to be sorted: ";
+    cout << "Enter the size of the array: ";
     cin >> n;
 
-    int arr[n];
-    cout << "Enter " << n << " elements to be sorted: ";
+    int* arr = new int[n];
+    cout << "Enter the elements: " << endl;
     for (int i = 0; i < n; i++)
         cin >> arr[i];
 
-    radixSort(arr, n);
+    comparisonCountingSort(arr, n);
 
     cout << "Sorted array: ";
     for (int i = 0; i < n; i++)
         cout << arr[i] << " ";
+    cout << endl;
 
     return 49;
 }
 ```
+
+![image](https://github.com/shrudex/DSE/assets/91502997/a20e819a-32f1-4292-a7a7-c60a660e9f35)
