@@ -26,7 +26,7 @@ Node* InsertNode(Node* root, int data)
         return root;
     }
     Node* queue[MAX_RANGE];
-    int front, rear = 0;
+    int front = 0, rear = 0;
     queue[rear] = root;
     
     while (front<=rear) {
