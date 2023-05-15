@@ -1,0 +1,80 @@
+# ✅Question - 01
+## Write a program to implement _Horspool’s Algorithm_ for string matching👨🏻‍🔬 and find the number of key comparisons▶️ in successful search🔎 and unsuccessful search🔎.
+
+```
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int horspoolStringMatch(const char* text, const char* pattern, int& comparisons) {
+    int n = strlen(text);
+    int m = strlen(pattern);
+    
+    //returning -1 if the length of pattern is more than that of text
+    if (m > n)
+        return -1;
+
+    const int MAX_CHARS = 256;
+    int shiftTable[MAX_CHARS];
+
+    //initialising the shift table with default shift value
+    for (int i = 0; i < MAX_CHARS; i++)
+        shiftTable[i] = m;
+
+    //computing shift value for each character in the pattern
+    for (int i = 0; i < m - 1; i++)
+        shiftTable[pattern[i]] = m - 1 - i;
+
+    //string matching begins
+    int i = m - 1;
+    
+    while (i < n) {
+        int k = 0;
+        comparisons++;
+        
+        //while the pattern is being matched
+        while (k < m && pattern[m - 1 - k] == text[i - k]) {
+            comparisons++;
+            k++;
+        }
+        
+        //if the exact pattern is found
+        if (k == m)
+            return i - m + 1;
+            
+        //shifting the value of i
+        i += shiftTable[text[i]];
+    }
+    
+    //if pattern not found
+    return -1;
+}
+
+int main() {
+    char text[1000];
+    char pattern[100];
+    
+    //taking the inputs from the user
+    cout << "Enter the text: ";
+    cin.getline(text, 100);
+
+    cout << "Enter the pattern: ";
+    cin.getline(pattern, 100);
+
+    int comparisons = 0;
+    int index = horspoolStringMatch(text, pattern, comparisons);
+
+    if (index != -1) {
+        cout << "Pattern found at index " << index << endl;
+        cout << "Number of key comparisons: " << comparisons << endl;
+    } else {
+        cout << "Pattern not found" << endl;
+        cout << "Number of key comparisons: " << comparisons << endl;
+    }
+
+    return 49;
+}
+```
+
+![image](https://github.com/shrudex/DSE/assets/91502997/1af31b88-9524-4068-a9e7-c544e0408530)
