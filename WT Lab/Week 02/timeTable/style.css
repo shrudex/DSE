@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Montserrat&family=Raleway:wght@500&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+h1{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 40px;
+    font-family: 'Borel', cursive;
+
+}
+table, th, td {
+    border: 0.4px solid black;    
+  }
+
+table{
+    margin-top: 0px;
+    max-width: 90%; 
+    height: 400px;
+    border-spacing: 2.5px;
+    box-shadow: 12px 12px 12px rgba(7, 7, 7, 0.267);
+    transition: 1s ease-in-out;
+
+}
+  
+td {
+    background-color: rgb(116, 176, 255);
+}
+
+th{
+    background-color: yellow;
+}
+
+tr{
+    height: 15%;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info{
+    margin-top: 40px;
+    font-size: 30px;
+    
+}
+
+h2{
+    font-family: 'Borel', cursive;
+}
+
+table:hover{
+    transform: scale(1.1);
+}
