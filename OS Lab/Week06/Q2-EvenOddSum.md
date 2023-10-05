@@ -2,7 +2,7 @@
 
 ### C program - **evenOddSum.c**
 
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 
