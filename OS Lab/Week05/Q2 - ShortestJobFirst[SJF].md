@@ -1,4 +1,4 @@
-## Q1 - Write a C program to simulate the following CPU scheduling algorithm: *Shortest Job First [SJF]*
+## Q2 - Write a C program to simulate the following CPU scheduling algorithm: *Shortest Job First [SJF]*
 
 ### C program - **algoSJF.c**
 ```
