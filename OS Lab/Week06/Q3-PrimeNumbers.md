@@ -2,7 +2,7 @@
 
 ### C program - **primeNumbers.c**
 
-```
+```c
 #include <pthread.h>
 #include <stdio.h>
 #include <stdbool.h>
