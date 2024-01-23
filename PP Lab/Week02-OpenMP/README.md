@@ -1,0 +1,1 @@
+OpenMP - Parallel Region
